@@ -1,0 +1,8 @@
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\bin\Debug\HeptagramServer.dll
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\bin\Debug\HeptagramServer.pdb
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\obj\Debug\HeptagramServer.csprojResolveAssemblyReference.cache
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\obj\Debug\HeptagramServer.dll
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\obj\Debug\HeptagramServer.pdb
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Phantasm\Desktop\HeptagramServer\HeptagramServer\bin\Debug\Newtonsoft.Json.xml
