@@ -11,32 +11,26 @@ namespace MonopolyGame
     public class Player
     {
         // Attributes //
-        private int id { get; }
-        private string username { get; }
-        private Token token { get; protected set; }
-        public int money { get; set; }
+        public int id { get; }
+        public string username { get; }
+        public Token token { get; protected set; }
+        public int money { get; protected set; }
         public List<Land> landList { get; protected set; }
-        public bool inGame { get; set; }
+        public bool inGame { get; protected set; }
+        public Game playingGame { get; protected set; }
 
         // Functions //
-        protected Player(string username)
+        public Player(int id, string username)
         {
-            this.id = Lobby.GetNewUserId();
+            this.id = id;
             this.username = username;
             this.token = new Token(this);
             this.landList = new List<Land>();
         }
 
-        public void ResetInGameData(Map map)
-        {
-            this.money = 0;
-            this.landList.Clear();
-            this.token.Reset(map);
-        }
-
         public void Move(int steps)
         {
-            this.token.Move(steps);
+            playingGame.MoveToken(token, steps);
         }
     }
 }
