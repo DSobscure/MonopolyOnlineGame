@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using MonopolyGame;
 
 namespace MonopolyGame
 {
@@ -11,27 +12,34 @@ namespace MonopolyGame
     public class Token
     {
         // Attributes //
-        public int playerId { get; }
-        public int mapId { get; set; }
-        public int blockPosition { get; set; }
+        public Player owner { get; }
+        public Map map { get; set; }
+        public Block position { get; set; }
         public int stepsLeft { get; set; }
 
         // Functions //
-        protected Token( int id )
+        protected Token(Player owner)
         {
-            this.playerId = id;
-            this.mapId = -1;
-            this.blockPosition = 0;
+            this.owner = owner;
             this.stepsLeft = 0;
         }
 
-        public void Move()
+        public void Move(int steps)
         {
+            Block newPosition;
+            this.stepsLeft = steps;
             while (this.stepsLeft-- > 0)
             {
-                this.blockPosition = Monopoly::Map.NextBlock(this.blockPosition);
-                
+                newPosition = map.NextBlock(this.position);
+                this.MovingAction(this.position, newPosition);
+                this.position = newPosition;
+                this.position.Trig(this.stepsLeft);
             }
+        }
+
+        public void MovingAction(Block departure, Block destination)
+        {
+
         }
     }
 }

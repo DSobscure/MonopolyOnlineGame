@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using MonopolyGame;
 
 namespace MonopolyGame
 {
@@ -13,30 +14,30 @@ namespace MonopolyGame
         // Attributes //
         private int id { get; }
         private string username { get; }
-        private MonopolyGame::Token token { get; protected set; }
+        private Token token { get; protected set; }
         public int money { get; set; }
-        public List<int> landIdList { get; protected set; }
+        public List<Land> landList { get; protected set; }
         public bool inGame { get; set; }
 
         // Functions //
-        protected Player( string username )
+        protected Player(string username)
         {
-            this.id = MonopolyGame::Lobby.GetNewUserId();
+            this.id = Lobby.GetNewUserId();
             this.username = username;
-            this.token = new Monopoly::Token( this.id );
-            this.landIdList = new List<int>();
+            this.token = new Token(this);
+            this.landList = new List<Land>();
         }
 
-        public void ResetInGameData( int mapId )
+        public void ResetInGameData(Map map)
         {
             this.money = 0;
             this.landList.Clear();
-            this.token.Reset( mapId );
+            this.token.Reset(map);
         }
 
-        public void Move()
+        public void Move(int steps)
         {
-            this.token.Move();
+            this.token.Move(steps);
         }
     }
 }
