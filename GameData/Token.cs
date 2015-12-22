@@ -1,7 +1,6 @@
 using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using MonopolyGame;
 
 namespace MonopolyGame
 {
@@ -37,9 +36,16 @@ namespace MonopolyGame
             }
         }
 
-        public void MovingAction(Block departure, Block destination)
+        private void MovingAction(Block departure, Block destination)
         {
 
+        }
+
+        public void Reset(Map map)
+        {
+            this.map = map;
+            this.position = map.StartBlock;
+            this.stepsLeft = 0;
         }
     }
 }
