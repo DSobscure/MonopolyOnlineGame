@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace MonopolyServer
+namespace MonopolyProtocol
 {
-    class OperationRequest
+    public class OperationRequest
     {
         [JsonProperty("OperationCode")]
         public byte OperationCode { get; set; }

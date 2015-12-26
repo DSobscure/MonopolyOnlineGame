@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading;
+using MonopolyProtocol;
 
 namespace MonopolyServer
 {
