@@ -1,13 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
-namespace HeptagramServer
+namespace MonopolyServer
 {
-    public class OperationRequest
+    class OperationRequest
     {
         [JsonProperty("OperationCode")]
         public byte OperationCode { get; set; }
