@@ -63,7 +63,7 @@ namespace TestClient
                 tcpClient = new TcpClient();
                 tcpClient.Connect(server_ip, server_port);
                 Console.WriteLine("connect to server");
-                Send(new OperationRequest() { OperationCode = 0, Parameters = new Dictionary<byte, object>() });
+                //Send(new OperationRequest() { OperationCode = 0, Parameters = new Dictionary<byte, object>() });
             }
             catch (Exception ex)
             {

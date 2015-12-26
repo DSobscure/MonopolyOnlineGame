@@ -10,7 +10,7 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-            string server_ip = "140.113.123.134";
+            string server_ip = "169.254.157.21";
             int server_port = 23*98;
             TestClient client = new TestClient(server_ip, server_port);
         }

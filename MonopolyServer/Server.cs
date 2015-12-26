@@ -7,7 +7,7 @@ namespace MonopolyServer
     class Server
     {
         string version;
-        Logger logger;
+        internal Logger logger;
         Dictionary<int, User> userDictionary;
         Dictionary<int, Game> gameDictionary;
     }

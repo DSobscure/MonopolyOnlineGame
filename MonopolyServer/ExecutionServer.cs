@@ -22,6 +22,7 @@ namespace MonopolyServer
             this.port = port;
             hostname = Dns.GetHostName();
             serverIP = Dns.GetHostEntry(hostname).AddressList.First(x=>x.AddressFamily == AddressFamily.InterNetwork);
+            Console.WriteLine(serverIP);
             isTerminated = false;
             serverListener = new TcpListener(serverIP, port);
             peerDictionary = new Dictionary<Guid, Peer>();
