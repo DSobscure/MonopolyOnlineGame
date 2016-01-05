@@ -18,7 +18,7 @@ namespace MonopolyGame
             {
                 blocks[token.position].TakeToken(token);
                 blocks[(token.position+1)% blocks.Count].PlaceToken(token);
-                token.position++;
+                token.position = (token.position+1)%blocks.Count;
             }            
         }
     }
