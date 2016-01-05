@@ -15,13 +15,15 @@ namespace MonopolyGame
         public void MoveToken(Token token, int steps)
         {
             int remainSteps = steps;
-            while(remainSteps > 0)
+            while(remainSteps > 1)
             {
                 blocks[token.position].TakeToken(token);
                 token.position = (token.position+1)%blocks.Count;
-                blocks[token.position].PlaceToken(token);
-                blocks[token.position].TrigEvent(token.owner, --remainSteps);
-            }            
+                blocks[token.position].PassToken(token);
+            }
+            blocks[token.position].TakeToken(token);
+            token.position = (token.position + 1) % blocks.Count;
+            blocks[token.position].PlaceToken(token);
         }
     }
 }

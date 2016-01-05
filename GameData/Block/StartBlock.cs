@@ -1,23 +1,27 @@
+using System;
+
 namespace MonopolyGame
 {
     public class StartBlock : Block
     {
         public int salary { get; private set; }
+        public event Action OnPassStartBlock;
 
         public StartBlock(int salary)
         {
             this.salary = salary;
         }
 
-        public override void TrigEvent(Player player, int remainSteps)
+        public override void Pass(Player player)
         {
-            if (remainSteps > 0)
-                this.Event(player);
+            this.Event(player);
         }
 
-        private override void Event(Player player)
+        protected override void Event(Player player)
         {
             player.money += salary;
+            if (OnPassStartBlock != null)
+                OnPassStartBlock();
         }
     }
 }

@@ -6,11 +6,14 @@ namespace MonopolyGame
     public abstract class Block
     {
         public List<Token> tokens { get; protected set; }
+        protected Map map { get; }
         public event Action OnTokenEnter;
+        public event Action OnTokenPass;
         public event Action OnTokenLeave;
 
-        protected Block()
+        protected Block(Map map)
         {
+            this.map = map;
             tokens = new List<Token>();
         }
 
@@ -19,6 +22,14 @@ namespace MonopolyGame
             tokens.Add(token);
             if (OnTokenEnter != null)
                 OnTokenEnter();
+            this.Place(token.owner);
+        }
+
+        public void PassToken(Token token)
+        {
+            if (OnTokenPass != null)
+                OnTokenPass();
+            this.Pass(token.owner);
         }
 
         public void TakeToken(Token token)
@@ -28,12 +39,10 @@ namespace MonopolyGame
                 OnTokenLeave();
         }
 
-        public virtual void TrigEvent(Player player, int remainSteps)
-        {
-            if (remainSteps == 0)
-                this.Event(player);
-        }
+        protected virtual void Place(Player player) { return; }
 
-        private virtual void Event(Player player) { return; }
+        protected virtual void Pass(Player player) { return; }
+
+        protected virtual void Event(Player player) { return; }
     }
 }
