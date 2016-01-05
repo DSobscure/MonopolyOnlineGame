@@ -27,5 +27,13 @@ namespace MonopolyGame
             if (OnTokenLeave != null)
                 OnTokenLeave();
         }
+
+        public virtual void TrigEvent(Player player, int remainSteps)
+        {
+            if (remainSteps == 0)
+                this.Event(player);
+        }
+
+        private virtual void Event(Player player) { return; }
     }
 }

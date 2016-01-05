@@ -1,7 +1,7 @@
 namespace MonopolyGame
 {
-    public class LabdBlock : Block
+    public class LandBlock : Block
     {
-
+        public Land land
     }
 }

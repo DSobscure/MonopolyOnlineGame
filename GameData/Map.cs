@@ -14,11 +14,13 @@ namespace MonopolyGame
 
         public void MoveToken(Token token, int steps)
         {
-            for(int remainSteps = steps; remainSteps > 0; remainSteps--)
+            int remainSteps = steps;
+            while(remainSteps > 0)
             {
                 blocks[token.position].TakeToken(token);
-                blocks[(token.position+1)% blocks.Count].PlaceToken(token);
                 token.position = (token.position+1)%blocks.Count;
+                blocks[token.position].PlaceToken(token);
+                blocks[token.position].TrigEvent(token.owner, --remainSteps);
             }            
         }
     }
