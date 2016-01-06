@@ -5,23 +5,16 @@ namespace MonopolyGame
     public class StartBlock : Block
     {
         public int salary { get; private set; }
-        public event Action OnPassStartBlock;
 
-        public StartBlock(int salary)
+        public StartBlock(Map map, int salary) : base(map)
         {
             this.salary = salary;
+            OnTokenPass += PassStartBlockEventTask;
         }
 
-        public override void Pass(Player player)
+        private void PassStartBlockEventTask(Token token)
         {
-            this.Event(player);
-        }
-
-        protected override void Event(Player player)
-        {
-            player.money += salary;
-            if (OnPassStartBlock != null)
-                OnPassStartBlock();
+            token.owner.money += salary;
         }
     }
 }

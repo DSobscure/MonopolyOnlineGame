@@ -16,44 +16,44 @@ namespace MonopolyGame
             this.players = players;
             this.destinyDeck = new DestinyDeck();
             this.chanceDeck = new ChanceDeck();
-            this.map = new Map(blocks);
+            this.map = new Map(this, blocks);
             this.blocks = new List<Block>(){
                 // 1st street
-                new StartBlock(map),
-                new LandBlock(new Land(500)),
-                new LandBlock(new Land(400)),
-                new LandBlock(new Land(200)),
+                new StartBlock(map, 1000),
+                new LandBlock(map, new Land(500)),
+                new LandBlock(map, new Land(400)),
+                new LandBlock(map, new Land(200)),
                 new ChanceBlock(map),
-                new LandBlock(new Land(200)),
-                new LandBlock(new Land(400)),
-                new LandBlock(new Land(300)),
+                new LandBlock(map, new Land(200)),
+                new LandBlock(map, new Land(400)),
+                new LandBlock(map, new Land(300)),
                 // 2nd street
                 new EmptyBlock(map),
-                new LandBlock(new Land(100)),
-                new LandBlock(new Land(200)),
-                new LandBlock(new Land(400)),
+                new LandBlock(map, new Land(100)),
+                new LandBlock(map, new Land(200)),
+                new LandBlock(map, new Land(400)),
                 new DestinyBlock(map),
-                new LandBlock(new Land(300)),
-                new LandBlock(new Land(400)),
-                new LandBlock(new Land(700)),
+                new LandBlock(map, new Land(300)),
+                new LandBlock(map, new Land(400)),
+                new LandBlock(map, new Land(700)),
                 // 3rd street
                 new EmptyBlock(map),
-                new LandBlock(new Land(500)),
-                new LandBlock(new Land(200)),
-                new LandBlock(new Land(300)),
+                new LandBlock(map, new Land(500)),
+                new LandBlock(map, new Land(200)),
+                new LandBlock(map, new Land(300)),
                 new ChanceBlock(map),
-                new LandBlock(new Land(200)),
-                new LandBlock(new Land(100)),
-                new LandBlock(new Land(100)),
+                new LandBlock(map, new Land(200)),
+                new LandBlock(map, new Land(100)),
+                new LandBlock(map, new Land(100)),
                 // 4th street
                 new EmptyBlock(map),
-                new LandBlock(new Land(200)),
-                new LandBlock(new Land(400)),
-                new LandBlock(new Land(600)),
+                new LandBlock(map, new Land(200)),
+                new LandBlock(map, new Land(400)),
+                new LandBlock(map, new Land(600)),
                 new DestinyBlock(map),
-                new LandBlock(new Land(300)),
-                new LandBlock(new Land(500)),
-                new LandBlock(new Land(800))
+                new LandBlock(map, new Land(300)),
+                new LandBlock(map, new Land(500)),
+                new LandBlock(map, new Land(800))
             };
         }
 

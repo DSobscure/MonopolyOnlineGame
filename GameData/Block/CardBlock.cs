@@ -7,18 +7,20 @@ namespace MonopolyGame
     {
         protected Deck deck { get; }
 
-        protected override void Place(Player player)
+        public CardBlock(Map map, Deck deck) : base(map)
         {
-            this.Event(player);
+            this.deck = deck;
+            OnTokenPlaceInto += DrawCardEventTask;
         }
 
-        protected override void Event(Player player)
+        private void DrawCardEventTask(Token token)
         {
-            this.ExecuteCard(player, deck.Draw());
+            ExecutedCard(token.owner, deck.Draw());
         }
 
         private void ExecutedCard(Player player, Card card)
         {
+            List<Player> allPlayers = this.map.game.players;
             switch (card.type)
             {
                 case CardType.GainMoney:
@@ -28,16 +30,14 @@ namespace MonopolyGame
                     player.money -= card.value;
                     break;
                 case CardType.StealMoney:
-                    List<Player> allPlayers = this.map.game.players;
-                    foreach (int victim in allPlayers)
+                    foreach (Player victim in allPlayers)
                     {
                         victim.money -= card.value;
                     }
                     player.money += card.value * allPlayers.Count;
                     break;
                 case CardType.ReleaseMoney:
-                    List<Player> allPlayers = this.map.game.players;
-                    foreach (int victim in allPlayers)
+                    foreach (Player victim in allPlayers)
                     {
                         victim.money += card.value;
                     }

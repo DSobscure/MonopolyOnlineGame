@@ -7,9 +7,9 @@ namespace MonopolyGame
     {
         public List<Token> tokens { get; protected set; }
         protected Map map { get; }
-        public event Action OnTokenEnter;
-        public event Action OnTokenPass;
-        public event Action OnTokenLeave;
+        public event Action<Token> OnTokenPlaceInto;
+        public event Action<Token> OnTokenPass;
+        public event Action<Token> OnTokenTakeLeave;
 
         protected Block(Map map)
         {
@@ -20,29 +20,21 @@ namespace MonopolyGame
         public void PlaceToken(Token token)
         {
             tokens.Add(token);
-            if (OnTokenEnter != null)
-                OnTokenEnter();
-            this.Place(token.owner);
+            if (OnTokenPlaceInto != null)
+                OnTokenPlaceInto(token);
         }
 
         public void PassToken(Token token)
         {
             if (OnTokenPass != null)
-                OnTokenPass();
-            this.Pass(token.owner);
+                OnTokenPass(token);
         }
 
         public void TakeToken(Token token)
         {
             tokens.Remove(token);
-            if (OnTokenLeave != null)
-                OnTokenLeave();
+            if (OnTokenTakeLeave != null)
+                OnTokenTakeLeave(token);
         }
-
-        protected virtual void Place(Player player) { return; }
-
-        protected virtual void Pass(Player player) { return; }
-
-        protected virtual void Event(Player player) { return; }
     }
 }

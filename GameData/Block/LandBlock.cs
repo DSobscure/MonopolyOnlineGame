@@ -5,41 +5,42 @@ namespace MonopolyGame
     public class LandBlock : Block
     {
         public Land land { get; }
-        public event Action OnBuyLandSelection;
-        public event Action OnUpgradeLandSelection;
-        public event Action OnPayForToll;
+        public event Action<Player,Land> OnBuyLandSelection;
+        public event Action<Player,Land> OnUpgradeLandSelection;
+        public event Action<Player,Player,int> OnPayForToll;
 
-        public LandBlock(Land land)
+        public LandBlock(Map map, Land land) : base(map)
         {
             this.land = land;
+            OnTokenPlaceInto += BuyLandSelectionEventTask;
+            OnTokenPlaceInto += UpgradeLandSelectionEventTask;
+            OnTokenPlaceInto += PayForTollEventTask;
         }
 
-        protected override void Place(Player player)
+        private void BuyLandSelectionEventTask(Token token)
         {
-            this.Event(player);
+            if (land.owner == null)
+            {
+                if (OnBuyLandSelection != null)
+                    OnBuyLandSelection(token.owner, land);
+            }
         }
-
-        protected override void Event(Player player)
+        private void UpgradeLandSelectionEventTask(Token token)
         {
-            if (this.land.owner == null)
+            if (land.owner == token.owner)
             {
-                if (OnBuyLandSelection != null && OnBuyLandSelection())
+                if (land.isUpgradable && (OnUpgradeLandSelection != null))
                 {
-                    this.land.Buy(player);
+                    OnUpgradeLandSelection(token.owner, land);
                 }
             }
-            else if (this.land.owner == player)
+        }
+        private void PayForTollEventTask(Token token)
+        {
+            if (land.owner != null && land.owner != token.owner)
             {
-                if (this.land.Upgradable && OnUpgradeLandSelection != null && OnUpgradeLandSelection())
-                {
-                    this.land.Upgrade();
-                }
-            }
-            else
-            {
-                this.land.PayForToll(player);
                 if (OnPayForToll != null)
-                    OnPayForToll();
+                    OnPayForToll(token.owner, land.owner, land.toll);
             }
         }
     }

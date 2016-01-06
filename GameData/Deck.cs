@@ -6,16 +6,14 @@ namespace MonopolyGame
 {
     public abstract class Deck
     {
-        protected List<Card> cards { get; }
+        protected List<Card> cards;
+        public int deckSize { get { return cards.Count; } }
 
-        public Event Draw()
+        public Card Draw()
         {
-            return this.events[new Random().Next(this.DeckSize())];
-        }
-
-        public int DeckSize()
-        {
-            return events.Count();
+            Card drawResult = cards[new Random().Next(deckSize)];
+            cards.Remove(drawResult);
+            return drawResult;
         }
     }
 }

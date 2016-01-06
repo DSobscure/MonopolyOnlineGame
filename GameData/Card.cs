@@ -2,7 +2,7 @@ using System;
 
 namespace MonopolyGame
 {
-    enum CardType { GainMoney, LoseMoney, StealMoney, ReleaseMoney }
+    public enum CardType { GainMoney, LoseMoney, StealMoney, ReleaseMoney }
     public class Card
     {
         public CardType type { get; }

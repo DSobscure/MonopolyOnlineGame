@@ -14,7 +14,7 @@ namespace MonopolyGame
         public int id { get; }
         public string username { get; }
         public Token token { get; protected set; }
-        public int money { get; protected set; }
+        public int money { get; set; }
         public List<Land> landList { get; protected set; }
         public bool inGame { get; protected set; }
         public Game playingGame { get; protected set; }

@@ -4,9 +4,9 @@ namespace MonopolyGame
 {
     public class ChanceBlock : CardBlock
     {
-        public ChanceBlock()
+        public ChanceBlock(Map map) : base(map, map.game.chanceDeck)
         {
-            deck = this.map.game.chanceDeck;
+
         }
     }
 }
