@@ -14,6 +14,10 @@ namespace MonopolyGame
         public Game(List<Player> players)
         {
             this.players = players;
+            foreach (Player player in players)
+            {
+                player.RunOutOfMoney += GameOver();
+            }
             this.destinyDeck = new DestinyDeck();
             this.chanceDeck = new ChanceDeck();
             this.map = new Map(this, blocks);
@@ -60,6 +64,11 @@ namespace MonopolyGame
         public void MoveToken(Token token, int step)
         {
             map.MoveToken(token, step);
+        }
+
+        public void GameOver()
+        {
+
         }
     }
 }

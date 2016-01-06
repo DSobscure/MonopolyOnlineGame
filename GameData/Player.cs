@@ -14,10 +14,19 @@ namespace MonopolyGame
         public int id { get; }
         public string username { get; }
         public Token token { get; protected set; }
-        public int money { get; set; }
+        public int money
+        {
+            get;
+            set
+            {
+                if (money <= 0 && RunOutOfMoney != null)
+                    RunOutOfMoney();
+            }
+        }
         public List<Land> landList { get; protected set; }
         public bool inGame { get; protected set; }
         public Game playingGame { get; protected set; }
+        public event Action RunOutOfMoney;
 
         // Functions //
         public Player(int id, string username)

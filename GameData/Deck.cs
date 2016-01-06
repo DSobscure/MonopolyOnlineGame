@@ -12,7 +12,7 @@ namespace MonopolyGame
         public Card Draw()
         {
             Card drawResult = cards[new Random().Next(deckSize)];
-            cards.Remove(drawResult);
+            //cards.Remove(drawResult);
             return drawResult;
         }
     }
