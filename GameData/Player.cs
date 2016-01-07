@@ -23,6 +23,7 @@ namespace MonopolyGame
             }
             set
             {
+                _money = value;
                 if (money <= 0 && RunOutOfMoney != null)
                     RunOutOfMoney();
             }
