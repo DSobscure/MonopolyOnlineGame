@@ -16,7 +16,7 @@ namespace MonopolyGame
             this.players = players;
             foreach (Player player in players)
             {
-                player.RunOutOfMoney += GameOver();
+                player.RunOutOfMoney += GameOver;
             }
             this.destinyDeck = new DestinyDeck();
             this.chanceDeck = new ChanceDeck();
