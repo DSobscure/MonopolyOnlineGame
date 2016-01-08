@@ -1,6 +1,6 @@
 ﻿namespace MonopolyProtocol
 {
-    public enum ErrorType
+    public enum ReturnCode : byte
     {
         Correct,
         NotExist,

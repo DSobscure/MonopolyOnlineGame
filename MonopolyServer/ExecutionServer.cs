@@ -15,6 +15,7 @@ namespace MonopolyServer
         bool isTerminated;
         TcpListener serverListener;
         Dictionary<Guid, PeerBase> peerDictionary;
+        
         Server server;
 
         public ExecutionServer(int port)
@@ -37,11 +38,19 @@ namespace MonopolyServer
             while (!isTerminated)
             {
                 TcpClient client = serverListener.AcceptTcpClient();
-                server.logger.Info(string.Format("Accept connectiion from {0} : {1}", (client.Client.LocalEndPoint as IPEndPoint).Address, (client.Client.LocalEndPoint as IPEndPoint).Port));
+                server.logger.Info(string.Format("Accept connectiion from {0} : {1}", (client.Client.RemoteEndPoint as IPEndPoint).Address, (client.Client.RemoteEndPoint as IPEndPoint).Port));
                 Guid newGuid = Guid.NewGuid();
-                peerDictionary.Add(newGuid, new Peer(newGuid, client, server));
+                Peer peer = new Peer(newGuid, client, server);
+                peer.OnPeerDisconnect += PeerDisconnect;
+                peerDictionary.Add(newGuid, peer);
                 Thread.Sleep(1);
             }
+        }
+
+        void PeerDisconnect(Guid guid)
+        {
+            if(peerDictionary.ContainsKey(guid))
+                peerDictionary.Remove(guid);
         }
     }
 }

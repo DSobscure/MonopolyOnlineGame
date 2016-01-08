@@ -1,15 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoginController : MonoBehaviour
 {
-    public void Login()
+    [SerializeField]
+    private LoginUIController loginUIController;
+
+    void Start()
     {
-        LoginResponseEventAction();
+        PeerGlobal.PS.OnLoginResponse += OnLoginResponseAction;
+    }
+    void OnDestroy()
+    {
+        PeerGlobal.PS.OnLoginResponse -= OnLoginResponseAction;
     }
 
-    public void LoginResponseEventAction()
+    public void Login()
     {
-        Application.LoadLevel("LobbyScene");
+        PeerGlobal.PS.Login(loginUIController.userNameInputField.text);
+    }
+
+    public void OnLoginResponseAction()
+    {
+        SceneManager.LoadScene("LobbyScene");
     }
 }

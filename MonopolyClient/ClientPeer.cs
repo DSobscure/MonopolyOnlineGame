@@ -60,11 +60,16 @@ namespace MonopolyClient
                     if (tcpClient.GetStream().DataAvailable)
                     {
                         int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
-                        CommunicationParameter parameter = JsonConvert.DeserializeObject<CommunicationParameter>(Encoding.Default.GetString(receiveBuffer, 0, bytes));
-                        if (parameter is OperationResponse)
-                            peerService.OnOperationResponse(parameter as OperationResponse);
-                        else if (parameter is EventData)
-                            peerService.OnEvent(parameter as EventData);
+                        CommunicationParameter parameter = JsonConvert.DeserializeObject<CommunicationParameter>(Encoding.Default.GetString(receiveBuffer, 0, bytes), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+                        switch(parameter.ParameterType)
+                        {
+                            case (byte)ParamaterType.OperationResponse:
+                                peerService.OnOperationResponse(parameter.Parameter as OperationResponse);
+                                break;
+                            case (byte)ParamaterType.EventData:
+                                peerService.OnEvent(parameter.Parameter as EventData);
+                                break;
+                        }                            
                     }
                 }
                 else

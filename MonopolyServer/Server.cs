@@ -8,14 +8,38 @@ namespace MonopolyServer
     {
         string version = "0.0.1";
         internal Logger logger;
-        Dictionary<int, User> userDictionary;
+        Dictionary<string, User> userDictionary;
         Dictionary<int, Game> gameDictionary;
+        Lobby lobby;
 
         public Server()
         {
             logger = new Logger();
-            userDictionary = new Dictionary<int, User>();
+            userDictionary = new Dictionary<string, User>();
             gameDictionary = new Dictionary<int, Game>();
+            lobby = new Lobby();
+        }
+
+        public bool UserOnline(User user)
+        {
+            if(!userDictionary.ContainsKey(user.UserName))
+            {
+                userDictionary.Add(user.UserName, user);
+                lobby.UserEnter(user);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public void UserOffline(User user)
+        {
+            if (userDictionary.ContainsKey(user.UserName))
+            {
+                userDictionary.Remove(user.UserName);
+                lobby.UserExit(user);
+            }
         }
     }
 }

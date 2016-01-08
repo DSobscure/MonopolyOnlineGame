@@ -29,12 +29,11 @@ namespace MonopolyServer
                 byte[] receiveBuffer = new byte[65535];
                 while (!(tcpClient.Client.Poll(0,SelectMode.SelectRead) && tcpClient.Available == 0))
                 {
-                
-                        if (tcpClient.GetStream().DataAvailable)
-                        {
-                            int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
-                            OnOperationRequest(JsonConvert.DeserializeObject<OperationRequest>(Encoding.Default.GetString(receiveBuffer, 0, bytes)));
-                        }
+                    if (tcpClient.GetStream().DataAvailable)
+                    {
+                        int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
+                        OnOperationRequest(JsonConvert.DeserializeObject<OperationRequest>(Encoding.Default.GetString(receiveBuffer, 0, bytes), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+                    }
                     Thread.Sleep(1);
                 }
             }
@@ -54,7 +53,7 @@ namespace MonopolyServer
         {
             try
             { 
-                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(operationResponse, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(new CommunicationParameter((byte)ParamaterType.OperationResponse, operationResponse), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
                 tcpClient.GetStream().Write(data, 0, data.Length);
             }
             catch (Exception ex)

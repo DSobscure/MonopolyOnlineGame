@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CreateRoomController : MonoBehaviour
 {
@@ -10,6 +11,6 @@ public class CreateRoomController : MonoBehaviour
 
     public void CreateRoomResponseEventAction()
     {
-        Application.LoadLevel("RoomScene");
+        SceneManager.LoadScene("RoomScene");
     }
 }
