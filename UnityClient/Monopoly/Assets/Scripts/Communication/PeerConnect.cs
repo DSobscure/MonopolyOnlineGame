@@ -3,9 +3,14 @@ using System.Collections;
 
 public class PeerConnect : MonoBehaviour
 {
+    void Awake()
+    {
+        Application.targetFrameRate = 24;
+    }
 
     void Start()
     {
+
         if (!PeerGlobal.PS.ServerConnected)
         {
             PeerGlobal.PS.OnConnectResponse += ConnectEventAction;

@@ -53,5 +53,110 @@ namespace MonopolyServer
                 }
             }
         }
+        private void GetLobbyDataTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void SendMessageTask(OperationRequest operationRequest)
+        {
+            if (operationRequest.Parameters.Count != 1)
+            {
+                OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.InvalidParameter,
+                        "SendMessageTask Parameter Error",
+                        new Dictionary<byte, object>()
+                    );
+                SendResponse(response);
+            }
+            else
+            {
+                string message = (string)operationRequest.Parameters[(byte)SendMessageParameterItem.Message];
+
+                if (SendMessage(message))
+                {
+                    OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.Correct,
+                        "",
+                        new Dictionary<byte, object>()
+                    );
+                    SendResponse(response);
+                }
+                else
+                {
+                    OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.NotExist,
+                        "Send target not exist",
+                        new Dictionary<byte, object>()
+                    );
+                    SendResponse(response);
+                }
+            }
+        }
+        private void SearchRoomTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void SearchPlayerTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void CreateRoomTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void JoinRoomTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void ReadyForGameTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void CancleReadyTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void StartGameTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void ExitGameTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void CloseRoomTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void GetGameDataTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void RollDiceTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void BuyLandTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void UpgradeLandTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void GetPlayerDataTask(OperationRequest operationRequest)
+        {
+
+        }
+        private void GiveUpTask(OperationRequest operationRequest)
+        {
+
+        }
     }
 }

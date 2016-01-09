@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace OnlineGameDataStructure
 {
-    public class Lobby
+    public class Lobby : UserGroup
     {
-        public Dictionary<string,User> Users { get; protected set; }
 
-        public Lobby()
+        public Lobby() : base()
         {
-            Users = new Dictionary<string, User>();
         }
 
         public void UserEnter(User user)
         {
             Users.Add(user.UserName, user);
+            user.UserGroup = this;
         }
 
         public void UserExit(User user)
         {
             Users.Remove(user.UserName);
+            user.UserGroup = null;
         }
     }
 }

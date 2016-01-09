@@ -7,4 +7,5 @@ public static class GameGlobal
     public static int ServerPort = 23*98;
     public static bool ConnectStatus = true;
     public static string version = "0.0.0";
+    public static bool LoginStatus = false;
 }

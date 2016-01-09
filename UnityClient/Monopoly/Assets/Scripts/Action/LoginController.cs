@@ -21,8 +21,9 @@ public class LoginController : MonoBehaviour
         PeerGlobal.PS.Login(loginUIController.userNameInputField.text);
     }
 
-    public void OnLoginResponseAction()
+    public void OnLoginResponseAction(bool status)
     {
-        SceneManager.LoadScene("LobbyScene");
+        if(status)
+            SceneManager.LoadScene("LobbyScene");
     }
 }

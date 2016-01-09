@@ -1,12 +1,10 @@
 ﻿namespace MonopolyProtocol
 {
-    public enum OperationType
+    public enum OperationType : byte
     {
         Login,
         GetLobbyData,
         SendMessage,
-        SearchRoom,
-        SearchPlayer,
         CreateRoom,
         JoinRoom,
         ReadyForGame,

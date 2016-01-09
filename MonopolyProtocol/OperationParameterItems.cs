@@ -6,15 +6,7 @@
     }
     public enum SendMessageParameterItem : byte
     {
-
-    }
-    public enum SearchRoomParameterItem : byte
-    {
-
-    }
-    public enum SearchPlayerParameterItem : byte
-    {
-
+        Message
     }
     public enum CreateRoomParameterItem : byte
     {

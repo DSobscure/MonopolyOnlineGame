@@ -39,16 +39,31 @@ public partial class PeerService : IPeerService
     public void Service()
     {
         peer.Service();
+
     }
 
     public void OnEvent(EventData eventData)
     {
-
+        DebugReturn(DebugLevel.Info, "event : " + ((BroadcastType)eventData.EventCode).ToString());
+        switch(eventData.EventCode)
+        {
+            case (byte)BroadcastType.SendMessage:
+                {
+                    SendMessageEventTask(eventData);
+                }
+                break;
+        }
     }
 
     public void OnOperationResponse(OperationResponse operationResponse)
     {
-        DebugReturn(DebugLevel.Info, "OK : "+operationResponse.ReturnCode.ToString());
+        DebugReturn(DebugLevel.Info, "operationResponse : " + ((OperationType)operationResponse.OperationCode).ToString());
+        switch(operationResponse.OperationCode)
+        {
+            case (byte)OperationType.Login:
+                LoginResponseTask(operationResponse);
+                break;
+        }
     }
 
     public void DebugReturn(DebugLevel debugLevel, string message)

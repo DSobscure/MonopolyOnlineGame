@@ -1,6 +1,7 @@
 ﻿using MonopolyGame;
 using OnlineGameDataStructure;
 using System.Collections.Generic;
+using MonopolyProtocol;
 
 namespace MonopolyServer
 {
@@ -18,6 +19,15 @@ namespace MonopolyServer
             userDictionary = new Dictionary<string, User>();
             gameDictionary = new Dictionary<int, Game>();
             lobby = new Lobby();
+        }
+
+        public void Broadcast(Peer[] peers, BroadcastType broadcastType, Dictionary<byte, object> parameter)
+        {
+            EventData eventData = new EventData((byte)broadcastType, parameter);
+            foreach (Peer peer in peers)
+            {
+                peer.SendEvent(eventData);
+            }
         }
 
         public bool UserOnline(User user)

@@ -2,42 +2,22 @@
 {
     public enum GetLobbyDataResponseItem
     {
-
-    }
-    public enum SearchRoomResponseItem
-    {
-
-    }
-    public enum SearchPlayerResponseItem
-    {
-
+        LobbyDataString
     }
     public enum CreateRoomResponseItem
     {
-
+        RoomDataString
     }
     public enum JoinRoomResponseItem
     {
-
+        RoomDataString
     }
     public enum GetGameDataResponseItem
     {
-
-    }
-    public enum RollDiceResponseItem
-    {
-
-    }
-    public enum BuyLandResponseItem
-    {
-
-    }
-    public enum UpgradeLandResponseItem
-    {
-
+        GameDataString
     }
     public enum GetPlayerDataResponseItem
     {
-
+        PlayerDataString
     }
 }
