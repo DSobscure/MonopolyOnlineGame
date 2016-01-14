@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
             new ExecutionServer(23 * 98);
+            //new Testing.LobbyTesting();
         }
     }
 }

@@ -1,18 +1,32 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineGameDataStructure
 {
     public abstract class UserGroup
     {
-        public Dictionary<string, User> Users { get; protected set; }
+        [JsonProperty("users")]
+        public Dictionary<string, User> users { get; protected set; }
 
         protected UserGroup()
         {
-            Users = new Dictionary<string, User>();
+            users = new Dictionary<string, User>();
+        }
+
+        [JsonConstructor]
+        protected UserGroup(Dictionary<string, User> users)
+        {
+            this.users = users;
+        }
+
+        public virtual void UserEnter(User user)
+        {
+            users.Add(user.userName, user);
+        }
+
+        public virtual void UserExit(User user)
+        {
+            users.Remove(user.userName);
         }
     }
 }

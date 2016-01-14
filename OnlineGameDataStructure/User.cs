@@ -1,13 +1,21 @@
-﻿namespace OnlineGameDataStructure
+﻿using Newtonsoft.Json;
+
+namespace OnlineGameDataStructure
 {
     public class User
     {
-        public string UserName { get; protected set; }
-        public UserGroup UserGroup { get; set; }
+        [JsonProperty("userName")]
+        public string userName { get; protected set; }
 
+        [JsonConstructor]
         public User(string userName)
         {
-            UserName = userName;
+            this.userName = userName;
+        }
+
+        public virtual User Serialize()
+        {
+            return null;
         }
     }
 }

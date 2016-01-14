@@ -11,6 +11,10 @@ public partial class PeerService
                         };
         peer.Send(new OperationRequest((byte)OperationType.Login, parameters));
     }
+    public void GetLobbyData()
+    {
+        peer.Send(new OperationRequest((byte)OperationType.GetLobbyData, new Dictionary<byte, object>()));
+    }
     public void SendMessage(string message)
     {
         var parameters = new Dictionary<byte, object> {

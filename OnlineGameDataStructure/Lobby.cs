@@ -1,28 +1,27 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineGameDataStructure
 {
     public class Lobby : UserGroup
     {
+        [JsonProperty("rooms")]
+        public Dictionary<int, Room> rooms { get; set; }
 
         public Lobby() : base()
         {
+            rooms = new Dictionary<int, Room>();
         }
 
-        public void UserEnter(User user)
+        [JsonConstructor]
+        public Lobby(Dictionary<string, User> users, Dictionary<int, Room> rooms) : base(users)
         {
-            Users.Add(user.UserName, user);
-            user.UserGroup = this;
+            this.rooms = rooms;
         }
 
-        public void UserExit(User user)
+        public virtual Lobby Serialize()
         {
-            Users.Remove(user.UserName);
-            user.UserGroup = null;
+            return null;
         }
     }
 }

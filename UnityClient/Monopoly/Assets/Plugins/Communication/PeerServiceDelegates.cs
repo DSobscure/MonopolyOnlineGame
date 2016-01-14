@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using OnlineGameDataStructure;
 
 public partial class PeerService
 {
@@ -15,6 +16,9 @@ public partial class PeerService
 
     public delegate void LoginResponseEventHandler(bool status);
     public event LoginResponseEventHandler OnLoginResponse;
+
+    public delegate void GetLobbyDataResponseEventHandler(Lobby lobby);
+    public event GetLobbyDataResponseEventHandler OnGetLobbyData;
 
     public delegate void SendMessageResponseEventHandler(bool status, string errorMessage);
     public event SendMessageResponseEventHandler OnSendMessageResponse;

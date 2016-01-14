@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MonopolyProtocol;
 using OnlineGameDataStructure;
+using Newtonsoft.Json;
 
 namespace MonopolyServer
 {
@@ -36,7 +37,7 @@ namespace MonopolyServer
                             "",
                             new Dictionary<byte, object>()
                         );
-                    server.logger.Info(string.Format("{0} 登入成功", user.UserName));
+                    server.logger.Info(string.Format("{0} 登入成功", user.userName));
                     SendResponse(response);
                 }
                 else
@@ -55,7 +56,19 @@ namespace MonopolyServer
         }
         private void GetLobbyDataTask(OperationRequest operationRequest)
         {
-
+            Dictionary<byte, object> parameter = new Dictionary<byte, object>
+            {
+                { (byte)GetLobbyDataResponseItem.LobbyDataString, JsonConvert.SerializeObject(server.lobby.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }) }
+            };
+            OperationResponse response = new OperationResponse
+                        (
+                            operationRequest.OperationCode,
+                            (byte)ReturnCode.Correct,
+                            "",
+                            parameter
+                        );
+            server.logger.Info(string.Format("{0} 取得了大廳資料", user.userName));
+            SendResponse(response);
         }
         private void SendMessageTask(OperationRequest operationRequest)
         {
@@ -97,14 +110,6 @@ namespace MonopolyServer
                     SendResponse(response);
                 }
             }
-        }
-        private void SearchRoomTask(OperationRequest operationRequest)
-        {
-
-        }
-        private void SearchPlayerTask(OperationRequest operationRequest)
-        {
-
         }
         private void CreateRoomTask(OperationRequest operationRequest)
         {

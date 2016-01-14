@@ -63,6 +63,9 @@ public partial class PeerService : IPeerService
             case (byte)OperationType.Login:
                 LoginResponseTask(operationResponse);
                 break;
+            case (byte)OperationType.GetLobbyData:
+                GetLobbyDataResponseTask(operationResponse);
+                break;
         }
     }
 

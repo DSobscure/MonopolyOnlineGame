@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using OnlineGameDataStructure;
 
 public static class GameGlobal
 {
@@ -8,4 +9,5 @@ public static class GameGlobal
     public static bool ConnectStatus = true;
     public static string version = "0.0.0";
     public static bool LoginStatus = false;
+    public static Lobby lobby = null;
 }

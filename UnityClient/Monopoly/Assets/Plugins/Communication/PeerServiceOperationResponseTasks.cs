@@ -1,86 +1,91 @@
 ﻿using MonopolyProtocol;
+using OnlineGameDataStructure;
+using Newtonsoft.Json;
 using System;
 
 public partial class PeerService
 {
     private void LoginResponseTask(OperationResponse operationResponse)
     {
-        try
+        if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
         {
-            if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
-            {
 
-                GameGlobal.LoginStatus = true;
-                if (OnLoginResponse != null)
-                    OnLoginResponse(true);
-            }
-            else
-            {
-                GameGlobal.LoginStatus = false;
-                if (OnAlert != null)
-                    OnAlert(operationResponse.DebugMessage);
-                if (OnLoginResponse != null)
-                    OnLoginResponse(false);
-            }
+            GameGlobal.LoginStatus = true;
+            if (OnLoginResponse != null)
+                OnLoginResponse(true);
         }
-        catch (Exception ex)
+        else
         {
-            throw ex;
+            GameGlobal.LoginStatus = false;
+            if (OnAlert != null)
+                OnAlert(operationResponse.DebugMessage);
+            if (OnLoginResponse != null)
+                OnLoginResponse(false);
         }
     }
-    private void SendMessageResponseTas(OperationResponse operationResponse)
+    private void GetLobbyDataResponseTask(OperationResponse operationResponse)
+    {
+        if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
+        {
+            string lobbyDataString = (string)operationResponse.Parameters[(byte)GetLobbyDataResponseItem.LobbyDataString];
+            GameGlobal.lobby = JsonConvert.DeserializeObject<Lobby>(lobbyDataString, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+            if (OnGetLobbyData != null)
+                OnGetLobbyData(GameGlobal.lobby);
+        }
+    }
+    private void SendMessageResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void CreateRoomResponseTas(OperationResponse operationResponse)
+    private void CreateRoomResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void JoinRoomResponseTas(OperationResponse operationResponse)
+    private void JoinRoomResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void ReadyForGameResponseTas(OperationResponse operationResponse)
+    private void ReadyForGameResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void CancleReadyResponseTas(OperationResponse operationResponse)
+    private void CancleReadyResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void StartGameResponseTas(OperationResponse operationResponse)
+    private void StartGameResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void ExitGameResponseTas(OperationResponse operationResponse)
+    private void ExitGameResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void CloseRoomResponseTas(OperationResponse operationResponse)
+    private void CloseRoomResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void GetGameDataResponseTas(OperationResponse operationResponse)
+    private void GetGameDataResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void RollDiceResponseTas(OperationResponse operationResponse)
+    private void RollDiceResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void BuyLandResponseTas(OperationResponse operationResponse)
+    private void BuyLandResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void UpgradeLandResponseTas(OperationResponse operationResponse)
+    private void UpgradeLandResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void GetPlayerDataResponseTas(OperationResponse operationResponse)
+    private void GetPlayerDataResponseTask(OperationResponse operationResponse)
     {
 
     }
-    private void GiveUpResponseTas(OperationResponse operationResponse)
+    private void GiveUpResponseTask(OperationResponse operationResponse)
     {
 
     }

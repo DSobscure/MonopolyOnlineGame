@@ -13,11 +13,11 @@ namespace MonopolyServer
         {
             Dictionary<byte, object> parameter = new Dictionary<byte, object>
                                         {
-                                            {(byte)SendMessageBroadcastParameterItem.SenderName, user.UserName },
+                                            {(byte)SendMessageBroadcastParameterItem.SenderName, user.userName },
                                             {(byte)SendMessageBroadcastParameterItem.Message, message}
                                         };
             List<Peer> peers = new List<Peer>();
-            foreach (ServerUser targetUser in user.UserGroup.Users.Values)
+            foreach (ServerUser targetUser in user.userGroup.users.Values)
             {
                 peers.Add(targetUser.Peer);
             }
