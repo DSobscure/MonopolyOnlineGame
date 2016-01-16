@@ -93,17 +93,9 @@ namespace MonopolyServer
                 #endregion
 
                 #region exit game
-                case (byte)OperationType.ExitGame:
+                case (byte)OperationType.ExitRoom:
                     {
-                        ExitGameTask(operationRequest);
-                    }
-                    break;
-                #endregion
-
-                #region close room
-                case (byte)OperationType.CloseRoom:
-                    {
-                        CloseRoomTask(operationRequest);
+                        ExitRoomTask(operationRequest);
                     }
                     break;
                 #endregion

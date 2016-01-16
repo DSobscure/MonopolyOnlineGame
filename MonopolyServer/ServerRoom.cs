@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OnlineGameDataStructure;
+using System.Linq;
 
 namespace MonopolyServer
 {
@@ -18,10 +19,12 @@ namespace MonopolyServer
 
         public void Close()
         {
-            foreach (User user in users.Values)
+            var userList = users.Values.ToList();
+            for (int i = 0 ; i < userList.Count; i++)
             {
-                (user as ServerUser).MoveToUserGroup(lobby);
+                (userList[i] as ServerUser).MoveToUserGroup(lobby);
             }
+            lobby.rooms.Remove(id);
         }
 
         public override Room Serialize()
@@ -32,6 +35,22 @@ namespace MonopolyServer
                 serializeUsers.Add(user.userName, user.Serialize());
             }
             return new Room(host.Serialize(), id, name, isEncrypted, password, serializeUsers);
+        }
+
+        public override void UserEnter(User user)
+        {
+            users.Add(user.userName, user);
+            user.ready = false;
+        }
+
+        public override void UserExit(User user)
+        {
+            if (users.ContainsKey(user.userName))
+            {
+                users.Remove(user.userName);
+                (lobby as ServerLobby).CloseRoom(id);
+            }
+            user.ready = false;
         }
     }
 }

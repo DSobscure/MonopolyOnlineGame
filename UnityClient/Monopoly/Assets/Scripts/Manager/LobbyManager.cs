@@ -10,12 +10,14 @@ public class LobbyManager : MonoBehaviour
     void Start ()
     {
         PeerGlobal.PS.OnGetLobbyData += OnGetLobbyDataAction;
+        PeerGlobal.PS.OnLobbyUpdate += OnGetLobbyDataAction;
         PeerGlobal.PS.GetLobbyData();
 	}
 
     void OnDestroy()
     {
         PeerGlobal.PS.OnGetLobbyData -= OnGetLobbyDataAction;
+        PeerGlobal.PS.OnLobbyUpdate -= OnGetLobbyDataAction;
     }
 
     private void OnGetLobbyDataAction(Lobby lobby)

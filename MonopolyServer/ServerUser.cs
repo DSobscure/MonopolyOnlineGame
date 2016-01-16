@@ -5,9 +5,9 @@ namespace MonopolyServer
     class ServerUser : User
     {
         public Peer Peer { get; set; }
-        public ServerUserGroup userGroup { get; protected set; }
+        public UserGroup userGroup { get; protected set; }
 
-        public ServerUser(string userName, Peer peer) : base(userName)
+        public ServerUser(string userName, bool ready, Peer peer) : base(userName, ready)
         {
             Peer = peer;
         }
@@ -16,14 +16,14 @@ namespace MonopolyServer
         {
             if (this.userGroup != null)
                 this.userGroup.UserExit(this);
-            this.userGroup = userGroup as ServerUserGroup;
+            this.userGroup = userGroup;
             if (this.userGroup != null)
                 this.userGroup.UserEnter(this);
         }
 
         public override User Serialize()
         {
-            return new User(userName);
+            return new User(userName, ready);
         }
     }
 }

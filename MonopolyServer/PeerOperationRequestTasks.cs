@@ -28,15 +28,19 @@ namespace MonopolyServer
             else
             {
                 string userName = (string)operationRequest.Parameters[(byte)LoginParameterItem.UserName];
-                if(server.UserOnline(user = new ServerUser(userName, this)))
+                if(server.UserOnline(user = new ServerUser(userName, false, this)))
                 {
+                    Dictionary<byte, object> parameter = new Dictionary<byte, object>
+                    {
+                        { (byte)LoginResponseItem.UserName, user.userName }
+                    };
                     OperationResponse response = new OperationResponse
-                        (
-                            operationRequest.OperationCode,
-                            (byte)ReturnCode.Correct,
-                            "",
-                            new Dictionary<byte, object>()
-                        );
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.Correct,
+                        "",
+                        parameter
+                    );
                     server.logger.Info(string.Format("{0} 登入成功", user.userName));
                     SendResponse(response);
                 }
@@ -87,7 +91,7 @@ namespace MonopolyServer
             {
                 string message = (string)operationRequest.Parameters[(byte)SendMessageParameterItem.Message];
 
-                if (SendMessage(message))
+                if (SendMessageBroadcast(message))
                 {
                     OperationResponse response = new OperationResponse
                     (
@@ -113,15 +117,102 @@ namespace MonopolyServer
         }
         private void CreateRoomTask(OperationRequest operationRequest)
         {
+            if (operationRequest.Parameters.Count != 3)
+            {
+                OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.InvalidParameter,
+                        "CreateRoomTask Parameter Error",
+                        new Dictionary<byte, object>()
+                    );
+                SendResponse(response);
+            }
+            else
+            {
+                string roomName = (string)operationRequest.Parameters[(byte)CreateRoomParameterItem.RoomName];
+                bool isEncrypted = (bool)operationRequest.Parameters[(byte)CreateRoomParameterItem.IsEncrypted];
+                string password = (string)operationRequest.Parameters[(byte)CreateRoomParameterItem.Password];
+                Room room;
 
+                if (CreateRoom(roomName, isEncrypted, password, out room))
+                {
+                    Dictionary<byte, object> parameter = new Dictionary<byte, object>
+                    {
+                        { (byte)CreateRoomResponseItem.RoomDataString, JsonConvert.SerializeObject(room.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }) }
+                    };
+                    OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.Correct,
+                        "",
+                        parameter
+                    );
+                    SendResponse(response);
+                }
+                else
+                {
+                    OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.InvalidOperation,
+                        "建立房間失敗",
+                        new Dictionary<byte, object>()
+                    );
+                    SendResponse(response);
+                }
+            }
         }
         private void JoinRoomTask(OperationRequest operationRequest)
         {
+            if (operationRequest.Parameters.Count != 2)
+            {
+                OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.InvalidParameter,
+                        "JoinRoomTask Parameter Error",
+                        new Dictionary<byte, object>()
+                    );
+                SendResponse(response);
+            }
+            else
+            {
+                int roomID = (int)(long)operationRequest.Parameters[(byte)JoinRoomParameterItem.RoomID];
+                string password = (string)operationRequest.Parameters[(byte)JoinRoomParameterItem.Password];
+                Room room;
 
+                if (JoinRoom(roomID, password, out room))
+                {
+                    Dictionary<byte, object> parameter = new Dictionary<byte, object>
+                    {
+                        { (byte)JoinRoomResponseItem.RoomDataString, JsonConvert.SerializeObject(room?.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }) }
+                    };
+                    OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.Correct,
+                        "",
+                        parameter
+                    );
+                    SendResponse(response);
+                }
+                else
+                {
+                    OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.InvalidOperation,
+                        "加入房間失敗",
+                        new Dictionary<byte, object>()
+                    );
+                    SendResponse(response);
+                }
+            }
         }
         private void ReadyForGameTask(OperationRequest operationRequest)
         {
-
+            
         }
         private void CancleReadyTask(OperationRequest operationRequest)
         {
@@ -131,13 +222,17 @@ namespace MonopolyServer
         {
 
         }
-        private void ExitGameTask(OperationRequest operationRequest)
+        private void ExitRoomTask(OperationRequest operationRequest)
         {
-
-        }
-        private void CloseRoomTask(OperationRequest operationRequest)
-        {
-
+            ExitRoom();
+            OperationResponse response = new OperationResponse
+                    (
+                        operationRequest.OperationCode,
+                        (byte)ReturnCode.Correct,
+                        "",
+                        new Dictionary<byte, object>()
+                    );
+            SendResponse(response);
         }
         private void GetGameDataTask(OperationRequest operationRequest)
         {

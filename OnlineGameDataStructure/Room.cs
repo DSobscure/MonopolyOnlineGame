@@ -16,6 +16,7 @@ namespace OnlineGameDataStructure
         [JsonProperty("password")]
         public string password { get; protected set; }
 
+
         public Room(User host, string name, bool isEncrypted, string password) : base()
         {
             this.host = host;

@@ -13,13 +13,14 @@ namespace MonopolyServer.Testing
         public LobbyTesting()
         {
             ServerLobby lobby = new ServerLobby();
-            ServerUser host = new ServerUser("host", null);
+            ServerUser host = new ServerUser("host", false,null);
+            Room room;
             Console.WriteLine("---------create room------------");
-            lobby.CreateRoom(host, "testRoom", true, "asdqwe");
+            lobby.CreateRoom(host, "testRoom", true, "asdqwe", out room);
             PrintLobby(lobby);
             Console.WriteLine("---------create room--------------");
-            lobby.CreateRoom(host, "testRoom2", false, "");
-            lobby.CreateRoom(host, "testRoom3", false, "");
+            lobby.CreateRoom(host, "testRoom2", false, "", out room);
+            lobby.CreateRoom(host, "testRoom3", false, "", out room);
             PrintLobby(lobby);
             string lobbyDataString = JsonConvert.SerializeObject(lobby.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
             Lobby resultLobby = JsonConvert.DeserializeObject<Lobby>(lobbyDataString, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });

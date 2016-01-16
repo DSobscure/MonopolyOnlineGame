@@ -25,4 +25,13 @@ public partial class PeerService
 
     public delegate void ReceiveMessageEventHandler(string senderName,string message);
     public event ReceiveMessageEventHandler OnReceiveMessage;
+
+    public delegate void JoinRoomEventHandler(bool status);
+    public event JoinRoomEventHandler OnJoinRoom;
+
+    public delegate void LobbyUpdateEventHandler(Lobby lobby);
+    public event LobbyUpdateEventHandler OnLobbyUpdate;
+
+    public delegate void RoomUpdateEventHandler(Room room);
+    public event RoomUpdateEventHandler OnRoomUpdate;
 }

@@ -9,8 +9,8 @@ public partial class PeerService
     {
         if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
         {
-
             GameGlobal.LoginStatus = true;
+            GameGlobal.userName = (string)operationResponse.Parameters[(byte)LoginResponseItem.UserName];
             if (OnLoginResponse != null)
                 OnLoginResponse(true);
         }
@@ -39,11 +39,33 @@ public partial class PeerService
     }
     private void CreateRoomResponseTask(OperationResponse operationResponse)
     {
-
+        if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
+        {
+            string roomDataString = (string)operationResponse.Parameters[(byte)CreateRoomResponseItem.RoomDataString];
+            GameGlobal.room = JsonConvert.DeserializeObject<Room>(roomDataString, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+            if (OnJoinRoom != null)
+                OnJoinRoom(true);
+        }
+        else
+        {
+            if (OnAlert != null)
+                OnAlert(operationResponse.DebugMessage);
+        }
     }
     private void JoinRoomResponseTask(OperationResponse operationResponse)
     {
-
+        if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
+        {
+            string roomDataString = (string)operationResponse.Parameters[(byte)JoinRoomResponseItem.RoomDataString];
+            GameGlobal.room = JsonConvert.DeserializeObject<Room>(roomDataString, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+            if (OnJoinRoom != null)
+                OnJoinRoom(true);
+        }
+        else
+        {
+            if(OnAlert != null)
+                OnAlert(operationResponse.DebugMessage);
+        }
     }
     private void ReadyForGameResponseTask(OperationResponse operationResponse)
     {

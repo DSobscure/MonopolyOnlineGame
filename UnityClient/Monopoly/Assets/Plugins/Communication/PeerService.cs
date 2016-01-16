@@ -39,7 +39,6 @@ public partial class PeerService : IPeerService
     public void Service()
     {
         peer.Service();
-
     }
 
     public void OnEvent(EventData eventData)
@@ -48,9 +47,13 @@ public partial class PeerService : IPeerService
         switch(eventData.EventCode)
         {
             case (byte)BroadcastType.SendMessage:
-                {
-                    SendMessageEventTask(eventData);
-                }
+                SendMessageEventTask(eventData);
+                break;
+            case (byte)BroadcastType.LobbyStatusChange:
+                LobbyStatusChangeEventTask(eventData);
+                break;
+            case (byte)BroadcastType.GameRoomStatusChange:
+                GameRoomStatusChangeEventTask(eventData);
                 break;
         }
     }
@@ -65,6 +68,12 @@ public partial class PeerService : IPeerService
                 break;
             case (byte)OperationType.GetLobbyData:
                 GetLobbyDataResponseTask(operationResponse);
+                break;
+            case (byte)OperationType.JoinRoom:
+                JoinRoomResponseTask(operationResponse);
+                break;
+            case (byte)OperationType.CreateRoom:
+                CreateRoomResponseTask(operationResponse);
                 break;
         }
     }

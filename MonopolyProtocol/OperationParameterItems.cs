@@ -10,11 +10,14 @@
     }
     public enum CreateRoomParameterItem : byte
     {
-
+        RoomName,
+        IsEncrypted,
+        Password
     }
     public enum JoinRoomParameterItem : byte
     {
-
+        RoomID,
+        Password
     }
     public enum UpgradeLandParameterItem : byte
     {

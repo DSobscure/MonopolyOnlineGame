@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace MonopolyServer
 {
-    class ExecutionServer
+    public class ExecutionServer
     {
         string hostname;
         int port;
@@ -23,6 +23,7 @@ namespace MonopolyServer
             this.port = port;
             hostname = Dns.GetHostName();
             serverIP = Dns.GetHostEntry(hostname).AddressList.First(x=>x.AddressFamily == AddressFamily.InterNetwork);
+            serverIP = IPAddress.Parse("127.0.0.1");
             server = new Server();
             server.logger.Info(serverIP.ToString());
             isTerminated = false;

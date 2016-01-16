@@ -1,5 +1,9 @@
 ﻿namespace MonopolyProtocol
 {
+    public enum LoginResponseItem
+    {
+        UserName
+    }
     public enum GetLobbyDataResponseItem
     {
         LobbyDataString

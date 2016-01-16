@@ -19,15 +19,6 @@ namespace MonopolyServer
             userDictionary = new Dictionary<string, ServerUser>();
             gameDictionary = new Dictionary<int, Game>();
             lobby = new ServerLobby();
-
-            lobby.CreateRoom(new User("test host1"), "test room1", false, "");
-            lobby.CreateRoom(new User("test host2"), "test room2", true, "room2");
-            lobby.CreateRoom(new User("test host3"), "test room3", false, "");
-            lobby.CreateRoom(new User("test host4"), "test room4", true, "room4");
-            lobby.CreateRoom(new User("test host5"), "test room5", false, "");
-            lobby.CreateRoom(new User("test host6"), "test room6", true, "room6");
-            lobby.CreateRoom(new User("test host7"), "test room7", false, "");
-            lobby.CreateRoom(new User("test host8"), "test room8", false, "");
         }
 
         public void Broadcast(Peer[] peers, BroadcastType broadcastType, Dictionary<byte, object> parameter)
