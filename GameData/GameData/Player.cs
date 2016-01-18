@@ -50,7 +50,7 @@ namespace MonopolyGame
         public void JoinGame(Game game, int startMoney)
         {
             playingGame = game;
-            _money = startMoney;
+            money = startMoney;
             inGame = true;
         }
 
