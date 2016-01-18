@@ -5,11 +5,15 @@ namespace MonopolyGame
     public class Map
     {
         public Game game { get; protected set; }
-        List<Block> blocks { get; set; }
+        public List<Block> blocks { get; protected set; }
 
-        public Map(Game game, List<Block> blocks)
+        public Map(Game game)
         {
             this.game = game;
+        }
+
+        public void RegisterBlocks(List<Block> blocks)
+        {
             this.blocks = blocks;
         }
 

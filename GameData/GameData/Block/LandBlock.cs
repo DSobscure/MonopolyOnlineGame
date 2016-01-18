@@ -17,30 +17,33 @@ namespace MonopolyGame
             OnTokenPlaceInto += PayForTollEventTask;
         }
 
-        private void BuyLandSelectionEventTask(Token token)
+        private void BuyLandSelectionEventTask(Block block, Token token)
         {
-            if (land.owner == null)
+            LandBlock landBlock = block as LandBlock;
+            if (landBlock.land.owner == null)
             {
-                if (OnBuyLandSelection != null)
-                    OnBuyLandSelection(token.owner, land);
+                if (landBlock.OnBuyLandSelection != null)
+                    landBlock.OnBuyLandSelection(token.owner, land);
                 //map.game.response = ResponseType.BuyLandSelection;
             }
         }
-        private void UpgradeLandSelectionEventTask(Token token)
+        private void UpgradeLandSelectionEventTask(Block block, Token token)
         {
-            if (land.owner == token.owner)
+            LandBlock landBlock = block as LandBlock;
+            if (landBlock.land.owner == token.owner)
             {
-                if (land.isUpgradable && (OnUpgradeLandSelection != null))
-                    OnUpgradeLandSelection(token.owner, land);
+                if (landBlock.land.isUpgradable && (landBlock.OnUpgradeLandSelection != null))
+                    landBlock.OnUpgradeLandSelection(token.owner, land);
                 //map.game.response = ResponseType.UpgradeLandSelection;
             }
         }
-        private void PayForTollEventTask(Token token)
+        private void PayForTollEventTask(Block block, Token token)
         {
-            if (land.owner != null && land.owner != token.owner)
+            LandBlock landBlock = block as LandBlock;
+            if (landBlock.land.owner != null && landBlock.land.owner != token.owner)
             {
-                if (OnPayForToll != null)
-                    OnPayForToll(token.owner, land.owner, land.toll);
+                if (landBlock.OnPayForToll != null)
+                    landBlock.OnPayForToll(token.owner, land.owner, land.toll);
                 //map.game.response = ResponseType.PayForTollMessage;
             }
         }
