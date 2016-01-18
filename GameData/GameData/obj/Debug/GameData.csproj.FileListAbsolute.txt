@@ -1,0 +1,15 @@
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\obj\Debug\GameData.csprojResolveAssemblyReference.cache
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\bin\Debug\GameData.dll
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\bin\Debug\GameData.pdb
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\obj\Debug\GameData.dll
+C:\Users\Phantasm\Desktop\軟體工程\Monopoly\GameData\GameData\obj\Debug\GameData.pdb
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\obj\Debug\GameData.csprojResolveAssemblyReference.cache
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\obj\Debug\GameData.dll
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\obj\Debug\GameData.pdb
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\GameData.dll
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\GameData.pdb
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\Newtonsoft.Json.xml
