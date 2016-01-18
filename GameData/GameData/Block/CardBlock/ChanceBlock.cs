@@ -4,7 +4,7 @@ namespace MonopolyGame
 {
     public class ChanceBlock : CardBlock
     {
-        public ChanceBlock(Map map) : base(map, map.game.chanceDeck)
+        public ChanceBlock(Map map, ChanceDeck chanceDeck) : base(map, chanceDeck)
         {
 
         }
