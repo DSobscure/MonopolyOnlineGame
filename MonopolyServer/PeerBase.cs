@@ -29,12 +29,16 @@ namespace MonopolyServer
                 byte[] receiveBuffer = new byte[65535];
                 while (!(tcpClient.Client.Poll(0,SelectMode.SelectRead) && tcpClient.Available == 0))
                 {
-                
-                        if (tcpClient.GetStream().DataAvailable)
+                    if (tcpClient.GetStream().DataAvailable)
+                    {
+                        int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
+                        string result = Encoding.Default.GetString(receiveBuffer, 0, bytes);
+                        string[] splitResult = result.Split(new string[] { "$$$" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string s in splitResult)
                         {
-                            int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
-                            OnOperationRequest(JsonConvert.DeserializeObject<OperationRequest>(Encoding.Default.GetString(receiveBuffer, 0, bytes)));
+                            OnOperationRequest(JsonConvert.DeserializeObject<OperationRequest>(s, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
                         }
+                    }
                     Thread.Sleep(1);
                 }
             }
@@ -50,11 +54,24 @@ namespace MonopolyServer
 
         protected abstract void OnOperationRequest(OperationRequest operationRequest);
 
-        protected void SendResponse(OperationResponse operationResponse)
+        internal void SendResponse(OperationResponse operationResponse)
         {
             try
-            { 
-                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(operationResponse, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+            {
+                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(new CommunicationParameter((byte)ParamaterType.OperationResponse, operationResponse), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto })+"$$$");
+                tcpClient.GetStream().Write(data, 0, data.Length);
+            }
+            catch (Exception ex)
+            {
+                server.logger.Error(guid.ToString() + " : " + ex.Message);
+                server.logger.Error(guid.ToString() + " : " + ex.StackTrace);
+            }
+        }
+        internal void SendEvent(EventData eventData)
+        {
+            try
+            {
+                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(new CommunicationParameter((byte)ParamaterType.EventData, eventData), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto })+"$$$");
                 tcpClient.GetStream().Write(data, 0, data.Length);
             }
             catch (Exception ex)

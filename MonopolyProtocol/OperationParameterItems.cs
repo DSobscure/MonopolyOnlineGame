@@ -1,34 +1,29 @@
 ﻿namespace MonopolyProtocol
 {
-    public enum LoginParameterItem
+    public enum LoginParameterItem : byte
+    {
+        UserName
+    }
+    public enum SendMessageParameterItem : byte
+    {
+        Message
+    }
+    public enum CreateRoomParameterItem : byte
+    {
+        RoomName,
+        IsEncrypted,
+        Password
+    }
+    public enum JoinRoomParameterItem : byte
+    {
+        RoomID,
+        Password
+    }
+    public enum UpgradeLandParameterItem : byte
     {
 
     }
-    public enum SendMessageParameterItem
-    {
-
-    }
-    public enum SearchRoomParameterItem
-    {
-
-    }
-    public enum SearchPlayerParameterItem
-    {
-
-    }
-    public enum CreateRoomParameterItem
-    {
-
-    }
-    public enum JoinRoomParameterItem
-    {
-
-    }
-    public enum UpgradeLandParameterItem
-    {
-
-    }
-    public enum GetPlayerDataParameterItem
+    public enum GetPlayerDataParameterItem : byte
     {
 
     }   

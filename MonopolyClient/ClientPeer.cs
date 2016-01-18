@@ -8,6 +8,7 @@ namespace MonopolyClient
 {
     public class ClientPeer
     {
+        UdpClient udpClient;
         TcpClient tcpClient;
         IPeerService peerService;
         byte[] receiveBuffer = new byte[65535];
@@ -41,7 +42,7 @@ namespace MonopolyClient
         {
             try
             {
-                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(operationRequest, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }));
+                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(operationRequest, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto })+"$$$");
                 tcpClient.GetStream().Write(data, 0, data.Length);
             }
             catch (Exception ex)
@@ -60,16 +61,28 @@ namespace MonopolyClient
                     if (tcpClient.GetStream().DataAvailable)
                     {
                         int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
-                        CommunicationParameter parameter = JsonConvert.DeserializeObject<CommunicationParameter>(Encoding.Default.GetString(receiveBuffer, 0, bytes));
-                        if (parameter is OperationResponse)
-                            peerService.OnOperationResponse(parameter as OperationResponse);
-                        else if (parameter is EventData)
-                            peerService.OnEvent(parameter as EventData);
+                        string result = Encoding.Default.GetString(receiveBuffer, 0, bytes);
+                        string[] splitResult = result.Split(new string[] { "$$$" }, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (string s in splitResult)
+                        {
+                            CommunicationParameter parameter = JsonConvert.DeserializeObject<CommunicationParameter>(s, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
+                            switch (parameter.ParameterType)
+                            {
+                                case (byte)ParamaterType.OperationResponse:
+                                    peerService.OnOperationResponse(parameter.Parameter as OperationResponse);
+                                    break;
+                                case (byte)ParamaterType.EventData:
+                                    peerService.OnEvent(parameter.Parameter as EventData);
+                                    break;
+                            }
+                        }                          
                     }
                 }
                 else
+                {
                     peerService.OnStatusChanged(StatusCode.Disconnect);
                 }
+            }
             catch (Exception ex)
             {
                 peerService.DebugReturn(DebugLevel.Error, ex.Message);

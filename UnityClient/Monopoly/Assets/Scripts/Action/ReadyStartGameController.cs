@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ReadyStartGameController : MonoBehaviour
 {
@@ -10,6 +11,6 @@ public class ReadyStartGameController : MonoBehaviour
 
     public void ReadyStartGameResponseEventAction()
     {
-        Application.LoadLevel("MonopolyScene");
+        SceneManager.LoadScene("MonopolyScene");
     }
 }

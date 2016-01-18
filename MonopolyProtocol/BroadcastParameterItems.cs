@@ -1,30 +1,32 @@
 ﻿namespace MonopolyProtocol
 {
-    public enum AlertBroadcastParameterItem
+    public enum AlertBroadcastParameterItem : byte
     {
-
+        AlertMessage
     }
-    public enum OnlineBroadcastParameterItem
+    public enum OnlineBroadcastParameterItem : byte
     {
-
+        UserDataString
     }
-    public enum LobbyStatusChangeBroadcastParameterItem
+    public enum LobbyStatusChangeBroadcastParameterItem : byte
     {
-
+        LobbyDataString
     }
-    public enum GameRoomStatusChangeBroadcastParameterItem
+    public enum GameRoomStatusChangeBroadcastParameterItem : byte
     {
-
+        GameRoomDataString
     }
-    public enum GameInviteBroadcastParameterItem
+    public enum GameInviteBroadcastParameterItem : byte
     {
-
+        InviterName,
+        RoomID
     }
-    public enum SendMessageBroadcastParameterItem
+    public enum SendMessageBroadcastParameterItem : byte
     {
-
+        SenderName,
+        Message
     }
-    public enum MonopolyGameEventsBroadcastParameterItem
+    public enum MonopolyGameEventsBroadcastParameterItem : byte
     {
 
     }

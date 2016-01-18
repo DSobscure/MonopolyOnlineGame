@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ExitRoomController : MonoBehaviour
 {
     public void ExitRoom()
     {
-        ExitRoomResponseEventAction();
-    }
-
-    public void ExitRoomResponseEventAction()
-    {
-        Application.LoadLevel("LobbyScene");
+        PeerGlobal.PS.ExitGame();
     }
 }

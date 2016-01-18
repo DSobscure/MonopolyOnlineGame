@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using OnlineGameDataStructure;
 
 public class CreateRoomController : MonoBehaviour
 {
+    [SerializeField]
+    private CreateRoomUIController createRoomUIController;
+
     public void CreateRoom()
     {
-        CreateRoomResponseEventAction();
-    }
-
-    public void CreateRoomResponseEventAction()
-    {
-        Application.LoadLevel("RoomScene");
+        PeerGlobal.PS.CreateRoom(createRoomUIController.RoomName, createRoomUIController.IsEntrcypted, createRoomUIController.Password);
     }
 }

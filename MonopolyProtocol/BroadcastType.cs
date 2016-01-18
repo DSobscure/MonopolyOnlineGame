@@ -1,6 +1,6 @@
 ﻿namespace MonopolyProtocol
 {
-    public enum BroadcastType
+    public enum BroadcastType : byte
     {
         Alert,
         Online,
