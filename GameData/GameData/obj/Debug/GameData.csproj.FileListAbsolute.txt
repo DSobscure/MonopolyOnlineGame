@@ -13,3 +13,10 @@ C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\GameData.dll
 C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\GameData.pdb
 C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\GameData.dll
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\GameData.pdb
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.csprojResolveAssemblyReference.cache
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.dll
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.pdb

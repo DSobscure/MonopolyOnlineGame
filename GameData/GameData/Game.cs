@@ -36,7 +36,8 @@ namespace MonopolyGame
             }
             this.destinyDeck = new DestinyDeck();
             this.chanceDeck = new ChanceDeck();
-            this.map = new Map(this, blocks);
+            this.blocks = new List<Block>();
+            this.map = new Map(this);
             this.blocks = new List<Block>(){
                 // 1st street
                 new StartBlock(map, 1000, players),
@@ -75,11 +76,12 @@ namespace MonopolyGame
                 new LandBlock(map, new Land(500, "Whiskey")),
                 new LandBlock(map, new Land(800, "X-ray"))
             };
+            map.LoadBlocks(blocks);
         }
 
-        public void MoveToken(Token token, int step)
+        public void MoveToken(Token token, int steps)
         {
-            map.MoveToken(token, step);
+            map.MoveToken(token, steps);
         }
 
         public void SetGameOverFlag()

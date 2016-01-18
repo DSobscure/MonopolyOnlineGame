@@ -13,6 +13,7 @@ namespace MonopolyGame
             foreach (Player player in players)
             {
                 this.tokens.Add(player.token);
+                player.token.position = 0;
             }
             OnTokenPass += PassStartBlockEventTask;
         }
