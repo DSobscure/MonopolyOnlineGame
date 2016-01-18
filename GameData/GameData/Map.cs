@@ -7,13 +7,9 @@ namespace MonopolyGame
         public Game game { get; protected set; }
         List<Block> blocks { get; set; }
 
-        public Map(Game game)
+        public Map(Game game, List<Block> blocks)
         {
             this.game = game;
-        }
-
-        public void LoadBlocks(List<Block> blocks)
-        {
             this.blocks = blocks;
         }
 
