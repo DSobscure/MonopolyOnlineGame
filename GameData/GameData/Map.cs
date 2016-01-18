@@ -5,7 +5,7 @@ namespace MonopolyGame
     public class Map
     {
         public Game game { get; protected set; }
-        List<Block> blocks { get; set; }
+        public List<Block> blocks { get; protected set; }
 
         public Map(Game game)
         {
