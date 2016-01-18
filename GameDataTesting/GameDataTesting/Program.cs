@@ -42,6 +42,7 @@ namespace GameDataTesting
                         }
                     }
                     steps = game.RollDice();
+                    Console.WriteLine("move {0} steps",steps);
                     player.Move(steps);
                 }
             }

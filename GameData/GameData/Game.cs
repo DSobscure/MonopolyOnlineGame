@@ -36,7 +36,8 @@ namespace MonopolyGame
             }
             this.destinyDeck = new DestinyDeck();
             this.chanceDeck = new ChanceDeck();
-            map = new Map(this, new List<Block>(){
+            map = new Map(this);
+            map.RegisterBlocks(new List<Block>(){
                 // 1st street
                 new StartBlock(map, 1000, players),
                 new LandBlock(map, new Land(500, "Alpha")),
