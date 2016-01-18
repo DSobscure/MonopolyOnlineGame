@@ -18,9 +18,10 @@ namespace MonopolyGame
             OnTokenPass += PassStartBlockEventTask;
         }
 
-        private void PassStartBlockEventTask(Token token)
+        private void PassStartBlockEventTask(Block block, Token token)
         {
-            token.owner.money += salary;
+            StartBlock startBlock = block as StartBlock;
+            token.owner.money += startBlock.salary;
         }
     }
 }

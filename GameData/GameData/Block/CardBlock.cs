@@ -13,9 +13,10 @@ namespace MonopolyGame
             OnTokenPlaceInto += DrawCardEventTask;
         }
 
-        private void DrawCardEventTask(Token token)
+        private void DrawCardEventTask(Block block, Token token)
         {
-            ExecutedCard(token.owner, deck.Draw());
+            CardBlock cardBlock = block as CardBlock;
+            ExecutedCard(token.owner, cardBlock.deck.Draw());
         }
 
         private void ExecutedCard(Player player, Card card)

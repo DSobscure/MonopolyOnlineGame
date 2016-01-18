@@ -17,6 +17,10 @@ namespace GameDataTesting
                                         new Player(1,"player2")
                                     };
             Game game = new Game(20000, players);
+            foreach(Block block in game.map.blocks)
+            {
+                block.OnTokenPlaceInto += TokenInto;
+            }
             Console.WriteLine("Game start....");
             string cmd;
             int steps, response;
@@ -66,6 +70,12 @@ namespace GameDataTesting
                 Console.Write(land.name + ", ");
             }
             Console.Write("\n");
+        }
+
+        private static void TokenInto(Block block, Token token)
+        {
+            Console.WriteLine(token.owner.username+"go into "+token.position);
+            Console.WriteLine("this block is"+block.GetType());
         }
     }
 }
