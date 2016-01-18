@@ -11,22 +11,27 @@ namespace MonopolyGame
     public class Player
     {
         // Attributes //
-        public int id { get; }
-        public string username { get; }
+        public int id { get; private set; }
+        public string username { get; private set; }
         public Token token { get; protected set; }
+        private int _money;
         public int money
         {
-            get;
+            get
+            {
+                return _money;
+            }
             set
             {
-                if (money <= 0 && RunOutOfMoney != null)
-                    RunOutOfMoney();
+                _money = value;
+                if (money <= 0)
+                    playingGame.SetGameOverFlag();
             }
         }
         public List<Land> landList { get; protected set; }
         public bool inGame { get; protected set; }
         public Game playingGame { get; protected set; }
-        public event Action RunOutOfMoney;
+        //public event Action RunOutOfMoney;
 
         // Functions //
         public Player(int id, string username)
@@ -40,6 +45,20 @@ namespace MonopolyGame
         public void Move(int steps)
         {
             playingGame.MoveToken(token, steps);
+        }
+
+        public void JoinGame(Game game, int startMoney)
+        {
+            playingGame = game;
+            _money = startMoney;
+            inGame = true;
+        }
+
+        public void LeaveGame()
+        {
+            inGame = false;
+            playingGame = null;
+            landList.Clear();
         }
     }
 }

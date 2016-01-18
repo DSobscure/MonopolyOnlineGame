@@ -5,7 +5,7 @@ namespace MonopolyGame
 {
     public class CardBlock : Block
     {
-        protected Deck deck { get; }
+        protected Deck deck { get; set; }
 
         public CardBlock(Map map, Deck deck) : base(map)
         {

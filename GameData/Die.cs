@@ -4,16 +4,17 @@ namespace MonopolyGame
 {
     public class Die
     {
-        private Random rand { get; }
+        public int roll
+        {
+            get
+            {
+                return new Random().Next(1, 6);
+            }
+        }
 
         public Die()
         {
-            this.rand = new Random();
-        }
-
-        public int RollDie()
-        {
-            return this.rand.Next(1, 6);
+            
         }
     }
 }

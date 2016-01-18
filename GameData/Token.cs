@@ -10,7 +10,7 @@ namespace MonopolyGame
     public class Token
     {
         // Attributes //
-        public Player owner { get; }
+        public Player owner { get; private set; }
         public int position { get; set; }
 
         // Functions //

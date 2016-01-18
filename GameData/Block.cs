@@ -6,7 +6,7 @@ namespace MonopolyGame
     public abstract class Block
     {
         public List<Token> tokens { get; protected set; }
-        protected Map map { get; }
+        protected Map map { get; set; }
         public event Action<Token> OnTokenPlaceInto;
         public event Action<Token> OnTokenPass;
         public event Action<Token> OnTokenTakeLeave;

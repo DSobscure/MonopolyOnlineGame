@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace MonopolyGame
 {
@@ -6,9 +7,13 @@ namespace MonopolyGame
     {
         public int salary { get; private set; }
 
-        public StartBlock(Map map, int salary) : base(map)
+        public StartBlock(Map map, int salary, List<Player> players) : base(map)
         {
             this.salary = salary;
+            foreach (Player player in players)
+            {
+                this.tokens.Add(player.token);
+            }
             OnTokenPass += PassStartBlockEventTask;
         }
 
