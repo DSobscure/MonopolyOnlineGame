@@ -20,3 +20,11 @@ C:\Users\Garyuu\Desktop\TestingTemplate\GameDataTesting\GameDataTesting\bin\Debu
 C:\Users\Garyuu\Dropbox\TestingTemplate\GameDataTesting\GameDataTesting\bin\Debug\GameDataTesting.exe.config
 C:\Users\Garyuu\Dropbox\TestingTemplate\GameDataTesting\GameDataTesting\obj\Debug\GameDataTesting.exe
 C:\Users\Garyuu\Dropbox\TestingTemplate\GameDataTesting\GameDataTesting\obj\Debug\GameDataTesting.pdb
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\bin\Debug\GameDataTesting.exe.config
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\obj\Debug\GameDataTesting.exe
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\obj\Debug\GameDataTesting.pdb
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\bin\Debug\GameDataTesting.exe
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\bin\Debug\GameDataTesting.pdb
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\bin\Debug\GameData.dll
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\bin\Debug\GameData.pdb
+C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameDataTesting\GameDataTesting\obj\Debug\GameDataTesting.csprojResolveAssemblyReference.cache

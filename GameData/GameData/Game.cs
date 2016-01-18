@@ -17,7 +17,7 @@ namespace MonopolyGame
     {
         public Map map { get; private set; }
         private Die die;
-        public List<Block> blocks { get; private set; }
+        //public List<Block> blocks { get; private set; }
         public List<Player> players { get; private set; }
         public DestinyDeck destinyDeck { get; private set; }
         public ChanceDeck chanceDeck { get; private set; }
@@ -36,14 +36,13 @@ namespace MonopolyGame
             }
             this.destinyDeck = new DestinyDeck();
             this.chanceDeck = new ChanceDeck();
-            this.map = new Map(this, blocks);
-            this.blocks = new List<Block>(){
+            map = new Map(this, new List<Block>(){
                 // 1st street
                 new StartBlock(map, 1000, players),
                 new LandBlock(map, new Land(500, "Alpha")),
                 new LandBlock(map, new Land(400, "Bravo")),
                 new LandBlock(map, new Land(200, "Charlie")),
-                new ChanceBlock(map),
+                new ChanceBlock(map, chanceDeck),
                 new LandBlock(map, new Land(200, "Delta")),
                 new LandBlock(map, new Land(400, "Echo")),
                 new LandBlock(map, new Land(300, "Foxtrot")),
@@ -52,7 +51,7 @@ namespace MonopolyGame
                 new LandBlock(map, new Land(100, "Golf")),
                 new LandBlock(map, new Land(200, "Hotel")),
                 new LandBlock(map, new Land(400, "India")),
-                new DestinyBlock(map),
+                new DestinyBlock(map, destinyDeck),
                 new LandBlock(map, new Land(300, "Juliet")),
                 new LandBlock(map, new Land(400, "Kilo")),
                 new LandBlock(map, new Land(700, "Lima")),
@@ -61,7 +60,7 @@ namespace MonopolyGame
                 new LandBlock(map, new Land(500, "Mike")),
                 new LandBlock(map, new Land(200, "November")),
                 new LandBlock(map, new Land(300, "Oscar")),
-                new ChanceBlock(map),
+                new ChanceBlock(map, chanceDeck),
                 new LandBlock(map, new Land(200, "Papa")),
                 new LandBlock(map, new Land(100, "Quebec")),
                 new LandBlock(map, new Land(100, "Romeo")),
@@ -70,11 +69,11 @@ namespace MonopolyGame
                 new LandBlock(map, new Land(200, "Sierra")),
                 new LandBlock(map, new Land(400, "Tango")),
                 new LandBlock(map, new Land(600, "Uniform")),
-                new DestinyBlock(map),
+                new DestinyBlock(map, destinyDeck),
                 new LandBlock(map, new Land(300, "Victor")),
                 new LandBlock(map, new Land(500, "Whiskey")),
                 new LandBlock(map, new Land(800, "X-ray"))
-            };
+            });
         }
 
         public void MoveToken(Token token, int step)

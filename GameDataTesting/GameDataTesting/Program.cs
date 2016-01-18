@@ -49,7 +49,10 @@ namespace GameDataTesting
 
         private static void PrintAllPlayer(List<Player> players)
         {
-            throw new NotImplementedException();
+            foreach(Player player in players)
+            {
+                PrintPlayerData(player);
+            }
         }
 
         private static void PrintPlayerData(Player player)
