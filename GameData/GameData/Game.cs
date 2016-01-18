@@ -77,9 +77,9 @@ namespace MonopolyGame
             });
         }
 
-        public void MoveToken(Token token, int step)
+        public void MoveToken(Token token, int steps)
         {
-            map.MoveToken(token, step);
+            map.MoveToken(token, steps);
         }
 
         public void SetGameOverFlag()
