@@ -13,6 +13,15 @@ C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\GameData.dll
 C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\GameData.pdb
 C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\Garyuu\Desktop\TestingTemplate\GameData\GameData\bin\Debug\Newtonsoft.Json.xml
+<<<<<<< HEAD
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\GameData.dll
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\GameData.pdb
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.csprojResolveAssemblyReference.cache
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.dll
+C:\Users\Garyuu\Documents\GitHub\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.pdb
+=======
 C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\bin\Debug\GameData.dll
 C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\bin\Debug\GameData.pdb
 C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\bin\Debug\Newtonsoft.Json.dll
@@ -21,3 +30,4 @@ C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\bin\De
 C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.csprojResolveAssemblyReference.cache
 C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.dll
 C:\Users\Phantasm\Desktop\GitHubRepo\MonopolyOnlineGame\GameData\GameData\obj\Debug\GameData.pdb
+>>>>>>> refs/remotes/origin/master
