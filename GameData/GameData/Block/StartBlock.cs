@@ -15,13 +15,6 @@ namespace MonopolyGame
                 this.tokens.Add(player.token);
                 player.token.position = 0;
             }
-            OnTokenPass += PassStartBlockEventTask;
-        }
-
-        private void PassStartBlockEventTask(Block block, Token token)
-        {
-            StartBlock startBlock = block as StartBlock;
-            token.owner.money += startBlock.salary;
         }
     }
 }

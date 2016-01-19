@@ -27,9 +27,16 @@ namespace MonopolyGame
             player.landList.Add(this);
         }
 
-        public void Upgrade()
+        public void Upgrade(Player player)
         {
+            player.money -= price;
             level += 1;
+        }
+
+        public void PayToll(Player player)
+        {
+            player.money -= toll;
+            owner.money += toll;
         }
     }
 }
