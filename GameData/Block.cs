@@ -1,19 +1,25 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MonopolyGame
 {
     public abstract class Block
     {
+        [JsonProperty("tokens")]
         public List<Token> tokens { get; protected set; }
-        protected Map map { get; set; }
-        public event Action<Token> OnTokenPlaceInto;
-        public event Action<Token> OnTokenPass;
-        public event Action<Token> OnTokenTakeLeave;
+        public event Action<Block, Token> OnTokenPlaceInto;
+        public event Action<Block, Token> OnTokenPass;
+        public event Action<Block, Token> OnTokenTakeLeave;
 
-        protected Block(Map map)
+        [JsonConstructor]
+        public Block(List<Token> tokens)
         {
-            this.map = map;
+            this.tokens = tokens;
+        }
+
+        protected Block()
+        {
             tokens = new List<Token>();
         }
 
@@ -21,20 +27,20 @@ namespace MonopolyGame
         {
             tokens.Add(token);
             if (OnTokenPlaceInto != null)
-                OnTokenPlaceInto(token);
+                OnTokenPlaceInto(this, token);
         }
 
         public void PassToken(Token token)
         {
             if (OnTokenPass != null)
-                OnTokenPass(token);
+                OnTokenPass(this, token);
         }
 
         public void TakeToken(Token token)
         {
             tokens.Remove(token);
             if (OnTokenTakeLeave != null)
-                OnTokenTakeLeave(token);
+                OnTokenTakeLeave(this, token);
         }
     }
 }

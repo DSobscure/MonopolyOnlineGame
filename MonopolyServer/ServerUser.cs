@@ -1,11 +1,14 @@
 ﻿using OnlineGameDataStructure;
+using MonopolyGame;
 
 namespace MonopolyServer
 {
-    class ServerUser : User
+    public class ServerUser : User
     {
         public Peer Peer { get; set; }
         public UserGroup userGroup { get; protected set; }
+        public Game playingGame;
+        public ServerPlayer player;
 
         public ServerUser(string userName, bool ready, Peer peer) : base(userName, ready)
         {

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using OnlineGameDataStructure;
+using MonopolyGame;
 
 public partial class PeerService
 {
@@ -34,4 +35,38 @@ public partial class PeerService
 
     public delegate void RoomUpdateEventHandler(Room room);
     public event RoomUpdateEventHandler OnRoomUpdate;
+
+    public event Action OnGameStart;
+
+    public delegate void MonopolyGameUpdateEventHandler(Game game);
+    public event MonopolyGameUpdateEventHandler OnMonopolyGameUpdate;
+
+    public delegate void RollDiceResultEventHandler(int number);
+    public event RollDiceResultEventHandler OnRollDice;
+
+    public delegate void BuyLandSelectionEventHandler(Land land);
+    public event BuyLandSelectionEventHandler OnBuyLandSelection;
+
+    public delegate void UpgradeLandSelectionEventHandler(Land land);
+    public event UpgradeLandSelectionEventHandler OnUpgradeLandSelection;
+
+    public delegate void PayForTollEventHandler(string player, string landName, int toll, string ownerName);
+    public event PayForTollEventHandler OnPayForToll;
+
+    public delegate void PassStartBlockEventHandler();
+    public event PassStartBlockEventHandler OnPassStartBlock;
+
+    public delegate void DrawCardEventHandler(string playerName, string blockType, Card card);
+    public event DrawCardEventHandler OnDrawCard;
+
+    public delegate void BuyLandEventHandler(string playerName, string landName);
+    public event BuyLandEventHandler OnBuyLand;
+
+    public delegate void UpgradeLandEventHandler(string playerName, string landName, int nowLevel);
+    public event UpgradeLandEventHandler OnUpgrade;
+
+    public delegate void EndGameEventHandler(string playerName, int winerMoney);
+    public event EndGameEventHandler OnEndGame;
+
+    public event Action OnLogOut;
 }

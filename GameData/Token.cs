@@ -10,13 +10,22 @@ namespace MonopolyGame
     public class Token
     {
         // Attributes //
-        public Player owner { get; private set; }
+        [JsonProperty("ownerName")]
+        public string ownerName { get; private set; }
+        [JsonProperty("position")]
         public int position { get; set; }
 
         // Functions //
-        public Token(Player owner)
+        [JsonConstructor]
+        public Token(int position, string ownerName)
         {
-            this.owner = owner;
+            this.position = position;
+            this.ownerName = ownerName;
+        }
+
+        public Token(string ownerName)
+        {
+            this.ownerName = ownerName;
         }
     }
 }

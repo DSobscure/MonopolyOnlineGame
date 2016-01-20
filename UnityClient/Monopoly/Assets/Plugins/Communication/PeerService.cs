@@ -55,6 +55,39 @@ public partial class PeerService : IPeerService
             case (byte)BroadcastType.GameRoomStatusChange:
                 GameRoomStatusChangeEventTask(eventData);
                 break;
+            case (byte)BroadcastType.GameStart:
+                GameStartEventTask(eventData);
+                break;
+            case (byte)BroadcastType.MonopolyGameStatusChange:
+                MonopolyGameStatusChangeEventTask(eventData);
+                break;
+            case (byte)BroadcastType.RollDiceResult:
+                RollDiceResultEventTask(eventData);
+                break;
+            case (byte)BroadcastType.BuyLandSelection:
+                BuyLandSelectionEventTask(eventData);
+                break;
+            case (byte)BroadcastType.UpgradeLandSelection:
+                UpgradeLandSelectionEventTask(eventData);
+                break;
+            case (byte)BroadcastType.PayForToll:
+                PayForTollEventTask(eventData);
+                break;
+            case (byte)BroadcastType.PassStartBlock:
+                PassStartBlockEventTask(eventData);
+                break;
+            case (byte)BroadcastType.DrawCard:
+                DrawCardEventTask(eventData);
+                break;
+            case (byte)BroadcastType.BuyLand:
+                BuyLandEventTask(eventData);
+                break;
+            case (byte)BroadcastType.UpgradeLand:
+                UpgradeLandEventTask(eventData);
+                break;
+            case (byte)BroadcastType.EndGame:
+                EndGameEventTask(eventData);
+                break;
         }
     }
 
@@ -75,6 +108,12 @@ public partial class PeerService : IPeerService
             case (byte)OperationType.CreateRoom:
                 CreateRoomResponseTask(operationResponse);
                 break;
+            case (byte)OperationType.RollDice:
+                RollDiceResponseTask(operationResponse);
+                break;
+            case (byte)OperationType.LogOut:
+                LogOutResponseTask(operationResponse);
+                break;
         }
     }
 
@@ -82,6 +121,12 @@ public partial class PeerService : IPeerService
     {
         if(OnDebugReturn != null)
             OnDebugReturn.Invoke(message);
+    }
+
+    public void Alert(string message)
+    {
+        if (OnAlert != null)
+            OnAlert(message);
     }
 
     public void OnStatusChanged(StatusCode statusCode)

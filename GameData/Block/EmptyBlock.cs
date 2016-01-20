@@ -1,10 +1,17 @@
-using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace MonopolyGame
 {
     public class EmptyBlock : Block
     {
-        public EmptyBlock(Map map) : base(map)
+        [JsonConstructor]
+        public EmptyBlock(List<Token> tokens) : base(tokens)
+        {
+
+        }
+
+        public EmptyBlock() : base()
         {
 
         }

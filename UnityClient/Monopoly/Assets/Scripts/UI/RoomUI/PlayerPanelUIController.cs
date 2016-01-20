@@ -24,6 +24,10 @@ public class PlayerPanelUIController : MonoBehaviour
             block.localScale = Vector3.one;
             block.localPosition = new Vector3(-225f + 150f * i, 0f);
             block.GetChild(0).GetComponent<Text>().text = playerEnumerator.Current.Value.userName;
+            if(playerEnumerator.Current.Value.ready)
+            {
+                block.GetChild(0).GetComponent<Text>().text += "\n Ready!";
+            }
             //block.GetChild(1).GetComponent<Text>().text = roomEnumerator.Current.Value.users.Count.ToString() + "/4";
             //int roomID = roomEnumerator.Current.Value.id;
             //block.GetComponent<Button>().onClick.AddListener(() => joinRoomController.SelectRoom(roomID));

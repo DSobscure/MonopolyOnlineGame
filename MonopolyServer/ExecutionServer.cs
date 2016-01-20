@@ -22,8 +22,13 @@ namespace MonopolyServer
         {
             this.port = port;
             hostname = Dns.GetHostName();
+            //foreach (IPAddress ip in Dns.GetHostEntry(hostname).AddressList)
+            //{
+            //    Console.WriteLine(ip);
+            //}
+            //Console.WriteLine("Input the IP:");
+            //serverIP = IPAddress.Parse(Console.ReadLine());
             serverIP = Dns.GetHostEntry(hostname).AddressList.First(x=>x.AddressFamily == AddressFamily.InterNetwork);
-            serverIP = IPAddress.Parse("127.0.0.1");
             server = new Server();
             server.logger.Info(serverIP.ToString());
             isTerminated = false;

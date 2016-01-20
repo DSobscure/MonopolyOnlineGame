@@ -67,48 +67,33 @@ public partial class PeerService
                 OnAlert(operationResponse.DebugMessage);
         }
     }
-    private void ReadyForGameResponseTask(OperationResponse operationResponse)
-    {
-
-    }
-    private void CancleReadyResponseTask(OperationResponse operationResponse)
-    {
-
-    }
-    private void StartGameResponseTask(OperationResponse operationResponse)
-    {
-
-    }
     private void ExitGameResponseTask(OperationResponse operationResponse)
-    {
-
-    }
-    private void CloseRoomResponseTask(OperationResponse operationResponse)
-    {
-
-    }
-    private void GetGameDataResponseTask(OperationResponse operationResponse)
     {
 
     }
     private void RollDiceResponseTask(OperationResponse operationResponse)
     {
-
-    }
-    private void BuyLandResponseTask(OperationResponse operationResponse)
-    {
-
-    }
-    private void UpgradeLandResponseTask(OperationResponse operationResponse)
-    {
-
-    }
-    private void GetPlayerDataResponseTask(OperationResponse operationResponse)
-    {
-
+        if (operationResponse.ReturnCode == (byte)ReturnCode.Correct)
+        {
+        }
+        else
+        {
+            if (OnAlert != null)
+                OnAlert(operationResponse.DebugMessage);
+        }
     }
     private void GiveUpResponseTask(OperationResponse operationResponse)
     {
 
+    }
+    private void LogOutResponseTask(OperationResponse operationResponse)
+    {
+        GameGlobal.LoginStatus = false;
+        GameGlobal.userName = "";
+        GameGlobal.lobby = null;
+        GameGlobal.room = null;
+        GameGlobal.playingGame = null;
+        if (OnLogOut != null)
+            OnLogOut();
     }
 }

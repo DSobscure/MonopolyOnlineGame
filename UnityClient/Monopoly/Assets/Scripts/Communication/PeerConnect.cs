@@ -10,10 +10,9 @@ public class PeerConnect : MonoBehaviour
 
     void Start()
     {
-
+        PeerGlobal.PS.OnConnectResponse += ConnectEventAction;
         if (!PeerGlobal.PS.ServerConnected)
         {
-            PeerGlobal.PS.OnConnectResponse += ConnectEventAction;
             PeerGlobal.PS.Connect(GameGlobal.ServerIP, GameGlobal. ServerPort);
         }
     }

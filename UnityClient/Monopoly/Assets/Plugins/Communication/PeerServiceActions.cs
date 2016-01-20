@@ -79,4 +79,12 @@ public partial class PeerService
     {
         peer.Send(new OperationRequest((byte)OperationType.GiveUp, new Dictionary<byte, object>()));
     }
+    public void EndTurn()
+    {
+        peer.Send(new OperationRequest((byte)OperationType.EndTurn, new Dictionary<byte, object>()));
+    }
+    public void LogOut()
+    {
+        peer.Send(new OperationRequest((byte)OperationType.LogOut, new Dictionary<byte, object>()));
+    }
 }

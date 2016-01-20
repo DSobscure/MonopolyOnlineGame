@@ -11,11 +11,15 @@ namespace MonopolyGame
     public class Player
     {
         // Attributes //
+        [JsonProperty("id")]
         public int id { get; private set; }
+        [JsonProperty("username")]
         public string username { get; private set; }
+        [JsonProperty("token")]
         public Token token { get; protected set; }
         private int _money;
-        public int money
+        [JsonProperty("money")]
+        public virtual int money
         {
             get
             {
@@ -24,41 +28,52 @@ namespace MonopolyGame
             set
             {
                 _money = value;
-                if (money <= 0)
-                    playingGame.SetGameOverFlag();
             }
         }
+        [JsonProperty("landList")]
         public List<Land> landList { get; protected set; }
+        [JsonProperty("inGame")]
         public bool inGame { get; protected set; }
-        public Game playingGame { get; protected set; }
-        //public event Action RunOutOfMoney;
 
         // Functions //
+        [JsonConstructor]
+        public Player(int id, string username, Token token, int money, List<Land> landList, bool inGame)
+        {
+            this.id = id;
+            this.username = username;
+            this.token = token;
+            this.money = money;
+            this.landList = landList;
+            this.inGame = inGame;
+        }
         public Player(int id, string username)
         {
             this.id = id;
             this.username = username;
-            this.token = new Token(this);
+            this.token = new Token(username);
             this.landList = new List<Land>();
         }
 
-        public void Move(int steps)
+        public virtual void Move(int steps)
         {
-            playingGame.MoveToken(token, steps);
+            
         }
 
-        public void JoinGame(Game game, int startMoney)
+        public virtual void JoinGame(Game game, int startMoney)
         {
-            playingGame = game;
-            _money = startMoney;
+            money = startMoney;
             inGame = true;
         }
 
-        public void LeaveGame()
+        public virtual void LeaveGame()
         {
             inGame = false;
-            playingGame = null;
             landList.Clear();
+        }
+
+        public virtual Player Serialize()
+        {
+            return null;
         }
     }
 }
