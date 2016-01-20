@@ -11,7 +11,6 @@ namespace MonopolyClient
         UdpClient udpClient;
         TcpClient tcpClient;
         IPeerService peerService;
-        byte[] receiveBuffer = new byte[65535];
 
         public ClientPeer(IPeerService peerService)
         {
@@ -42,7 +41,7 @@ namespace MonopolyClient
         {
             try
             {
-                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(operationRequest, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto })+"$$$");
+                byte[] data = Encoding.Default.GetBytes(JsonConvert.SerializeObject(operationRequest, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto })+ "XXXXXXXX");
                 tcpClient.GetStream().Write(data, 0, data.Length);
             }
             catch (Exception ex)
@@ -60,9 +59,12 @@ namespace MonopolyClient
                 {
                     if (tcpClient.GetStream().DataAvailable)
                     {
+                        System.Threading.Thread.Sleep(150);
+                        byte[] receiveBuffer = new byte[1000000];
                         int bytes = tcpClient.GetStream().Read(receiveBuffer, 0, tcpClient.Available);
                         string result = Encoding.Default.GetString(receiveBuffer, 0, bytes);
-                        string[] splitResult = result.Split(new string[] { "$$$" }, StringSplitOptions.RemoveEmptyEntries);
+                        peerService.DebugReturn(DebugLevel.Degug, result);
+                        string[] splitResult = result.Split(new string[] { "XXXXXXXX" }, StringSplitOptions.RemoveEmptyEntries);
                         foreach (string s in splitResult)
                         {
                             CommunicationParameter parameter = JsonConvert.DeserializeObject<CommunicationParameter>(s, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
@@ -78,7 +80,7 @@ namespace MonopolyClient
                         }                          
                     }
                 }
-                else
+                //else
                 {
                     peerService.OnStatusChanged(StatusCode.Disconnect);
                 }

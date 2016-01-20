@@ -32,7 +32,7 @@ public class MessagePanelUIController : MonoBehaviour
     public void UpdateMessageBox()
     {
         showingText.text = showingContent.ToString();
-        showingText.rectTransform.sizeDelta = new Vector2(showingText.rectTransform.rect.width, showingText.preferredHeight);
+        showingText.rectTransform.sizeDelta = new Vector2(messageBox.rect.width, showingText.preferredHeight);
         scrollBar.value = 0;
     }
 }

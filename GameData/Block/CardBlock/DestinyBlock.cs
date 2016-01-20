@@ -1,10 +1,17 @@
-using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace MonopolyGame
 {
     public class DestinyBlock : CardBlock
     {
-        public DestinyBlock(Map map) : base(map, map.game.destinyDeck)
+        [JsonConstructor]
+        public DestinyBlock(DestinyDeck destinyDeck, List<Token> tokens) : base(destinyDeck, tokens)
+        {
+
+        }
+
+        public DestinyBlock(DestinyDeck destinyDeck) : base(destinyDeck)
         {
 
         }

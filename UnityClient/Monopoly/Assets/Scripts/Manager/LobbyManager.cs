@@ -6,6 +6,8 @@ public class LobbyManager : MonoBehaviour
 {
     [SerializeField]
     private RoomPanelUIController roomPanelUIController;
+    [SerializeField]
+    private PlayerListUIController playerListUIController;
 
     void Start ()
     {
@@ -23,5 +25,6 @@ public class LobbyManager : MonoBehaviour
     private void OnGetLobbyDataAction(Lobby lobby)
     {
         roomPanelUIController.UpdateRoomPanel(lobby);
+        playerListUIController.UpdatePlayerListPanel(lobby);
     }
 }

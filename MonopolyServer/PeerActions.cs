@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using OnlineGameDataStructure;
 using System.Collections.Generic;
+using System.Linq;
+using MonopolyGame;
 
 namespace MonopolyServer
 {
@@ -25,7 +27,7 @@ namespace MonopolyServer
         private bool JoinRoom(int roomID, string password, out Room room)
         {
             room = null;
-            if(server.lobby.rooms.ContainsKey(roomID))
+            if(server.lobby.rooms.ContainsKey(roomID) && server.lobby.rooms[roomID].users.Count < 4)
             {
                 room = server.lobby.rooms[roomID];
                 if(room.isEncrypted)
@@ -54,16 +56,24 @@ namespace MonopolyServer
                 return false;
             }
         }
-        private void RoomUpdateBroadcast(Room room)
+        private void RoomUpdateBroadcast(Room room, List<User> users = null)
         {
             Dictionary<byte, object> parameter = new Dictionary<byte, object>
                                         {
                                             {(byte)GameRoomStatusChangeBroadcastParameterItem.GameRoomDataString, JsonConvert.SerializeObject(room.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }) }
                                         };
             List<Peer> peers = new List<Peer>();
-            foreach (ServerUser targetUser in user.userGroup.users.Values)
+            peers.Add(user.Peer);
+            foreach (ServerUser targetUser in room.users.Values)
             {
                 peers.Add(targetUser.Peer);
+            }
+            if(users != null)
+            {
+                foreach (ServerUser targetUser in users)
+                {
+                    peers.Add(targetUser.Peer);
+                }
             }
             server.Broadcast(peers.ToArray(), BroadcastType.GameRoomStatusChange, parameter);
         }
@@ -80,7 +90,7 @@ namespace MonopolyServer
                                             {(byte)LobbyStatusChangeBroadcastParameterItem.LobbyDataString, JsonConvert.SerializeObject(lobby.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }) }
                                         };
             List<Peer> peers = new List<Peer>();
-            foreach (ServerUser targetUser in user.userGroup.users.Values)
+            foreach (ServerUser targetUser in server.lobby.users.Values)
             {
                 peers.Add(targetUser.Peer);
             }
@@ -91,18 +101,33 @@ namespace MonopolyServer
             if(user.userGroup is Room)
             {
                 Room room = user.userGroup as Room;
-                if(room.host == user)
+                List<User> users = room.users.Values.ToList();
+                if (room.host == user)
                 {
+                    
                     user.MoveToUserGroup(server.lobby);
+                    RoomUpdateBroadcast(room, users);
                     LobbyUpdateBroadcast(server.lobby);
-                    RoomUpdateBroadcast(room);
                 }
                 else
                 {
                     user.MoveToUserGroup(server.lobby);
-                    RoomUpdateBroadcast(room);
+                    RoomUpdateBroadcast(room, users);
                 }
             }
+        }
+        private void GameUpdateBroadcast(Game game)
+        {
+            Dictionary<byte, object> parameter = new Dictionary<byte, object>
+            {
+                {(byte)MonopolyGameStatusChangeBroadcastParameterItem.GameDataString, JsonConvert.SerializeObject(game.Serialize(), new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }) }
+            };
+            List<Peer> peers = new List<Peer>();
+            foreach (ServerUser targetUser in (game as ServerGame).users)
+            {
+                peers.Add(targetUser.Peer);
+            }
+            server.Broadcast(peers.ToArray(), BroadcastType.MonopolyGameStatusChange, parameter);
         }
     }
 }

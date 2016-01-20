@@ -22,7 +22,7 @@ public class ReadyStartButtonUIController : MonoBehaviour
         PeerGlobal.PS.OnRoomUpdate -= StartButtonCheck;
     }
 
-    private void StartButtonCheck(Room room)
+    internal void StartButtonCheck(Room room)
     {
         if (GameGlobal.room.host.userName == GameGlobal.userName)
         {
@@ -33,6 +33,20 @@ public class ReadyStartButtonUIController : MonoBehaviour
             else
             {
                 ReadyStartButton.enabled = false;
+            }
+        }
+        else
+        {
+            if (room.users.ContainsKey(GameGlobal.userName))
+            {
+                if(room.users[GameGlobal.userName].ready)
+                {
+                    ReadyStartButton.GetComponentInChildren<Text>().text = "取消";
+                }
+                else
+                {
+                    ReadyStartButton.GetComponentInChildren<Text>().text = "準備";
+                }
             }
         }
     }

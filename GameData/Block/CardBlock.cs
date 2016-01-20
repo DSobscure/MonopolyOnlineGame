@@ -1,49 +1,27 @@
-using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace MonopolyGame
 {
     public class CardBlock : Block
     {
+        [JsonProperty("deck")]
         protected Deck deck { get; set; }
 
-        public CardBlock(Map map, Deck deck) : base(map)
+        [JsonConstructor]
+        public CardBlock(Deck deck, List<Token> tokens) : base(tokens)
         {
             this.deck = deck;
-            OnTokenPlaceInto += DrawCardEventTask;
         }
 
-        private void DrawCardEventTask(Token token)
+        public CardBlock(Deck deck) : base()
         {
-            ExecutedCard(token.owner, deck.Draw());
+            this.deck = deck;
         }
 
-        private void ExecutedCard(Player player, Card card)
+        public Card Draw()
         {
-            List<Player> allPlayers = this.map.game.players;
-            switch (card.type)
-            {
-                case CardType.GainMoney:
-                    player.money += card.value;
-                    break;
-                case CardType.LoseMoney:
-                    player.money -= card.value;
-                    break;
-                case CardType.StealMoney:
-                    foreach (Player victim in allPlayers)
-                    {
-                        victim.money -= card.value;
-                    }
-                    player.money += card.value * allPlayers.Count;
-                    break;
-                case CardType.ReleaseMoney:
-                    foreach (Player victim in allPlayers)
-                    {
-                        victim.money += card.value;
-                    }
-                    player.money -= card.value * allPlayers.Count;
-                    break;
-            }
+            return deck.Draw();
         }
     }
 }

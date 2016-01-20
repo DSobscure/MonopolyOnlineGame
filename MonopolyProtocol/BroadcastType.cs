@@ -8,6 +8,17 @@
         GameRoomStatusChange,
         GameInvite,
         SendMessage,
-        MonopolyGameEvents
+        GameStart,
+        MonopolyGameStatusChange,
+        CloseGame,
+        RollDiceResult,
+        BuyLandSelection,
+        UpgradeLandSelection,
+        PayForToll,
+        PassStartBlock,
+        DrawCard,
+        BuyLand,
+        UpgradeLand,
+        EndGame
     }
 }

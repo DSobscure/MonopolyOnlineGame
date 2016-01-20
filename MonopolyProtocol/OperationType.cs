@@ -16,6 +16,8 @@
         BuyLand,
         UpgradeLand,
         GetPlayerData,
-        GiveUp
+        GiveUp,
+        EndTurn,
+        LogOut
     }
 }

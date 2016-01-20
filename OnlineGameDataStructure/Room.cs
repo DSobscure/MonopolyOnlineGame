@@ -15,7 +15,8 @@ namespace OnlineGameDataStructure
         public bool isEncrypted { get; protected set; }
         [JsonProperty("password")]
         public string password { get; protected set; }
-
+        [JsonProperty("isClosed")]
+        public bool isClosed { get; protected set; }
 
         public Room(User host, string name, bool isEncrypted, string password) : base()
         {
@@ -23,16 +24,18 @@ namespace OnlineGameDataStructure
             this.name = name;
             this.isEncrypted = isEncrypted;
             this.password = password;
+            this.isClosed = false;
         }
 
         [JsonConstructor]
-        public Room(User host, int id, string name, bool isEncrypted, string password, Dictionary<string, User> users) : base(users)
+        public Room(User host, int id, string name, bool isEncrypted, string password, Dictionary<string, User> users, bool isClosed) : base(users)
         {
             this.host = host;
             this.id = id;
             this.name = name;
             this.isEncrypted = isEncrypted;
             this.password = password;
+            this.isClosed = isClosed;
         }
 
         public virtual Room Serialize()

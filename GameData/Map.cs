@@ -1,26 +1,30 @@
 using System.Collections.Generic;
-using System.Linq;
+using Newtonsoft.Json;
 
 namespace MonopolyGame
 {
     public class Map
     {
-        public Game game { get; protected set; }
-        List<Block> blocks { get; set; }
+        [JsonProperty("blocks")]
+        public List<Block> blocks { get; protected set; }
 
-        public Map(Game game, List<Block> blocks)
+        [JsonConstructor]
+        public Map(List<Block> blocks)
         {
-            this.game = game;
             this.blocks = blocks;
+        }
+
+        public Map()
+        {
+
         }
 
         public void MoveToken(Token token, int steps)
         {
-            int remainSteps = steps;
-            while(remainSteps > 1)
+            for (int i = 0; i < steps - 1; i++)
             {
                 blocks[token.position].TakeToken(token);
-                token.position = (token.position+1)%blocks.Count;
+                token.position = (token.position + 1) % blocks.Count;
                 blocks[token.position].PassToken(token);
             }
             blocks[token.position].TakeToken(token);

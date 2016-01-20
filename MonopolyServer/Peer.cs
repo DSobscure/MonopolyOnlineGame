@@ -5,7 +5,7 @@ using System.Net.Sockets;
 
 namespace MonopolyServer
 {
-    partial class Peer : PeerBase
+    public partial class Peer : PeerBase
     {
         public event Action<Guid> OnPeerDisconnect;
         ServerUser user;
@@ -132,13 +132,13 @@ namespace MonopolyServer
                     break;
                 #endregion
 
-                #region get player data
-                case (byte)OperationType.GetPlayerData:
-                    {
-                        GetPlayerDataTask(operationRequest);
-                    }
-                    break;
-                #endregion
+                //#region get player data
+                //case (byte)OperationType.GetPlayerData:
+                //    {
+                //        GetPlayerDataTask(operationRequest);
+                //    }
+                //    break;
+                //#endregion
 
                 #region give up
                 case (byte)OperationType.GiveUp:
@@ -147,6 +147,20 @@ namespace MonopolyServer
                     }
                     break;
                 #endregion
+
+                #region end turn
+                case (byte)OperationType.EndTurn:
+                    {
+                        EndTurnTask(operationRequest);
+                    }
+                    break;
+                #endregion
+
+                case (byte)OperationType.LogOut:
+                    {
+                        LogOutTask(operationRequest);
+                    }
+                    break;
             }
         }
     }

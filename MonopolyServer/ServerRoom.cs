@@ -25,6 +25,7 @@ namespace MonopolyServer
                 (userList[i] as ServerUser).MoveToUserGroup(lobby);
             }
             lobby.rooms.Remove(id);
+            isClosed = true;
         }
 
         public override Room Serialize()
@@ -34,7 +35,7 @@ namespace MonopolyServer
             {
                 serializeUsers.Add(user.userName, user.Serialize());
             }
-            return new Room(host.Serialize(), id, name, isEncrypted, password, serializeUsers);
+            return new Room(host.Serialize(), id, name, isEncrypted, password, serializeUsers, isClosed);
         }
 
         public override void UserEnter(User user)
@@ -48,7 +49,8 @@ namespace MonopolyServer
             if (users.ContainsKey(user.userName))
             {
                 users.Remove(user.userName);
-                (lobby as ServerLobby).CloseRoom(id);
+                if(user == host)
+                    (lobby as ServerLobby).CloseRoom(id);
             }
             user.ready = false;
         }
